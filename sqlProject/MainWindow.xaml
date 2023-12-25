@@ -5,8 +5,50 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="StartUpWindow"
+        Height="700" Width="700" 
+        WindowStyle="ToolWindow" ResizeMode="NoResize"
+        FontFamily="Georgia" FontSize="30"
+        Style="{DynamicResource WindowStyle}">
+    <Window.Resources>
+        <Style BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,15"/>
+        </Style>
+        <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="TextBox">
+            <Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="MaxLength" Value="10"/>
+        </Style>
+        <Style BasedOn="{StaticResource PasswordBoxStyle}" TargetType="PasswordBox">
+            <Setter Property="BorderThickness" Value="10"/>
+            <Setter Property="Margin" Value="0,5"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="MaxLength" Value="10"/>
+        </Style>
+        <Style BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="17.5"/>
+            <Setter Property="Margin" Value="0,15"/>
+            <Setter Property="Padding" Value="0,10"/>
+        </Style>
+    </Window.Resources>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.07*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Чтобы начать, войдите в систему"/>
+            <TextBox MaxWidth="250" MaxLength="10" Margin="0 5" Padding="10 5" BorderThickness="10"/>
+            <PasswordBox MaxWidth="250" MaxLength="10" Margin="0 5" Padding="10 5" BorderThickness="10"/>
+            <Button BorderThickness="0" MaxWidth="110" FontSize="17.5" Margin="0 15" Content="Войти" Padding="0 10"/>
+        </StackPanel>
     </Grid>
 </Window>
