@@ -18,7 +18,8 @@ C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\refin
 C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject.pdb
 C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject.genruntimeconfig.cache
 C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\ref\sqlProject.dll
-C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\DarkTheme.baml
-C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\LightTheme.baml
 C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\App.baml
 C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject.sourcelink.json
+C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\StartUpWindowStyle.baml
+C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\DarkThemeColors.baml
+C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\LightThemeColors.baml

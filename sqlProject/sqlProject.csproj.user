@@ -10,10 +10,13 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\DarkTheme.xaml">
+    <Page Update="styles\DarkThemeColors.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\LightTheme.xaml">
+    <Page Update="styles\LightThemeColors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="styles\StartUpWindowStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

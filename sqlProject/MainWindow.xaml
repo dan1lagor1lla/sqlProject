@@ -6,49 +6,21 @@
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
         Title="StartUpWindow"
-        Height="700" Width="700" 
-        WindowStyle="ToolWindow" ResizeMode="NoResize"
-        FontFamily="Georgia" FontSize="30"
+        WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen"
+        Height="950" Width="1050" 
+        MinHeight="500" MinWidth="500"
+        FontFamily="Georgia"
         Style="{DynamicResource WindowStyle}">
     <Window.Resources>
-        <Style BasedOn="{StaticResource TextBlockStyle}" TargetType="TextBlock">
-            <Setter Property="TextAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,15"/>
-        </Style>
-        <Style BasedOn="{StaticResource TextBoxStyle}" TargetType="TextBox">
-            <Setter Property="BorderThickness" Value="10"/>
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="MaxLength" Value="10"/>
-        </Style>
-        <Style BasedOn="{StaticResource PasswordBoxStyle}" TargetType="PasswordBox">
-            <Setter Property="BorderThickness" Value="10"/>
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="Padding" Value="10,5"/>
-            <Setter Property="MaxLength" Value="10"/>
-        </Style>
-        <Style BasedOn="{StaticResource ButtonStyle}" TargetType="Button">
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="17.5"/>
-            <Setter Property="Margin" Value="0,15"/>
-            <Setter Property="Padding" Value="0,10"/>
-        </Style>
+        <ResourceDictionary Source="styles\StartUpWindowStyle.xaml"/>
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="0.07*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel Grid.Row="1">
+        <StackPanel Margin="50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Чтобы начать, войдите в систему"/>
-            <TextBox MaxWidth="250" MaxLength="10" Margin="0 5" Padding="10 5" BorderThickness="10"/>
-            <PasswordBox MaxWidth="250" MaxLength="10" Margin="0 5" Padding="10 5" BorderThickness="10"/>
-            <Button BorderThickness="0" MaxWidth="110" FontSize="17.5" Margin="0 15" Content="Войти" Padding="0 10"/>
+            <TextBox/>
+            <PasswordBox/>
+            <Button Click="Button_Click" Content="Войти"/>
         </StackPanel>
     </Grid>
 </Window>

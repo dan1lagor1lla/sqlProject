@@ -20,5 +20,14 @@ namespace sqlProject
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.Resources.MergedDictionaries[0].Source.ToString().Contains("DarkThemeColors.xaml"))
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("C:\\Users\\taras\\source\\repos\\sqlProject\\sqlProject\\styles\\LightThemeColors.xaml") });
+            else
+                Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("C:\\Users\\taras\\source\\repos\\sqlProject\\sqlProject\\styles\\DarkThemeColors.xaml") });
+            Application.Current.Resources.MergedDictionaries.RemoveAt(0);
+        }
     }
 }
