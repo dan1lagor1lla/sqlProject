@@ -29,5 +29,7 @@ namespace sqlProject
                 Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("C:\\Users\\taras\\source\\repos\\sqlProject\\sqlProject\\styles\\DarkThemeColors.xaml") });
             Application.Current.Resources.MergedDictionaries.RemoveAt(0);
         }
+
+        private void DragWindow(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

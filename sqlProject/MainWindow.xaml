@@ -6,21 +6,63 @@
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
         Title="StartUpWindow"
-        WindowStyle="ToolWindow"
-        WindowStartupLocation="CenterScreen"
-        Height="950" Width="1050" 
-        MinHeight="500" MinWidth="500"
-        FontFamily="Georgia"
         Style="{DynamicResource WindowStyle}">
     <Window.Resources>
         <ResourceDictionary Source="styles\StartUpWindowStyle.xaml"/>
     </Window.Resources>
+    <!--<Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel FlowDirection="RightToLeft" MouseLeftButtonDown="DragWindow" Background="{TemplateBinding Foreground}" Grid.Row="0" Orientation="Horizontal">
+                        <Button Height="33.3" Width="33.3" BorderThickness="0">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button" >
+                                    <Border Name="border" Height="33.3" Width="33.3">
+                                        <ContentControl>
+                                            <ContentControl.Content>x
+                                            </ContentControl.Content>
+                                        </ContentControl>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="border" Property="Background" Value="Red"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </StackPanel>
+                    <AdornerDecorator Grid.Row="1">
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>-->
     <Grid>
         <StackPanel Margin="50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Чтобы начать, войдите в систему"/>
-            <TextBox/>
-            <PasswordBox/>
-            <Button Click="Button_Click" Content="Войти"/>
+            <TextBlock Text="Чтобы начать, войдите в систему" Style="{DynamicResource MainText}"/>
+            <TextBox Style="{StaticResource DefaultBox}"/>
+            <PasswordBox Style="{StaticResource DefaultBox}"/>
+            <Button Name="button" Content="Войти" Click="Button_Click"/>
+            <TextBlock Style="{DynamicResource AdditionalText}">
+                <Run Text="Впервые здесь?"/>
+                <Run 
+                    Text="Создать аккаунт" 
+                    Foreground="{DynamicResource TextColor}"
+                    Cursor="Hand"
+                    TextDecorations="Underline"/>
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Window>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\taras\source\repos\sqlProject\sqlProject\obj\Debug\net8.0-windows\
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\
 sqlProject
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\taras\source\repos\sqlProject\sqlProject\App.xaml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\App.xaml
 42112756040
 
 6-1774816376
 198-688555687
 MainWindow.xaml;styles\DarkThemeColors.xaml;styles\LightThemeColors.xaml;styles\StartUpWindowStyle.xaml;
 
-True
+False
 

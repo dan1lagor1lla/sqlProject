@@ -2,40 +2,43 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="WindowStyle" TargetType="Window">
         <Setter Property="Background" Value="{DynamicResource MainColor}"/>
+        <Setter Property="WindowStyle" Value="ToolWindow"/>
+        <Setter Property="Height" Value="950"/>
+        <Setter Property="Width" Value="1050"/>
+        <Setter Property="MinHeight" Value="550"/>
+        <Setter Property="MinWidth" Value="550"/>
+        <Setter Property="FontFamily" Value="Georgia"/>
+        <Setter Property="WindowState" Value="Normal"/>
     </Style>
-    <Style TargetType="TextBlock">
+    <Style x:Key="MainText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>
         <Setter Property="FontSize" Value="45"/>
+        <Setter Property="Margin" Value="0 10"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="IBeam"/>
     </Style>
-    <Style TargetType="TextBox">
+    <Style x:Key="AdditionalText" TargetType="TextBlock" BasedOn="{StaticResource MainText}">
+        <Setter Property="FontSize" Value="25"/>
+    </Style>
+    <Style x:Key="DefaultBox" TargetType="Control">
+        <Setter Property="Margin" Value="0 10"/>
         <Setter Property="BorderThickness" Value="10"/>
         <Setter Property="FontSize" Value="35"/>
-        <Setter Property="Margin" Value="0,30,0,7.5"/>
         <Setter Property="Padding" Value="15"/>
         <Setter Property="MaxWidth" Value="370"/>
         <Setter Property="Background" Value="{DynamicResource BackColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource AdditionalColor}"/>
-    </Style>
-    <Style TargetType="PasswordBox">
-        <Setter Property="BorderThickness" Value="10"/>
-        <Setter Property="FontSize" Value="35"/>
-        <Setter Property="Margin" Value="0,7.5,0,35"/>
-        <Setter Property="Padding" Value="15"/>
-        <Setter Property="MaxWidth" Value="370"/>
-        <Setter Property="Background" Value="{DynamicResource BackColor}"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource AdditionalColor}"/>
-
     </Style>
     <Style TargetType="Button">
+        <Setter Property="Margin" Value="0 10"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FontSize" Value="25"/>
         <Setter Property="MaxWidth" Value="130"/>
         <Setter Property="Padding" Value="0 15"/>
         <Setter Property="Background" Value="{DynamicResource AdditionalColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 </ResourceDictionary>
