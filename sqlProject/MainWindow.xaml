@@ -10,7 +10,7 @@
     <Window.Resources>
         <ResourceDictionary Source="styles\StartUpWindowStyle.xaml"/>
     </Window.Resources>
-    <!--<Window.Template>
+    <Window.Template>
         <ControlTemplate TargetType="Window">
             <Border
                 Width="{TemplateBinding Width}"
@@ -48,13 +48,13 @@
                 </Grid>
             </Border>
         </ControlTemplate>
-    </Window.Template>-->
+    </Window.Template>
     <Grid>
         <StackPanel Margin="50 0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Чтобы начать, войдите в систему" Style="{DynamicResource MainText}"/>
-            <TextBox Style="{StaticResource DefaultBox}"/>
+            <TextBox  Style="{StaticResource DefaultBox}" Template="{DynamicResource TextBoxTemplate}"/>
             <PasswordBox Style="{StaticResource DefaultBox}"/>
-            <Button Name="button" Content="Войти" Click="Button_Click"/>
+            <Button Content="Войти" Click="Button_Click"/>
             <TextBlock Style="{DynamicResource AdditionalText}">
                 <Run Text="Впервые здесь?"/>
                 <Run 
