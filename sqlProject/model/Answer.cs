@@ -1,21 +1,62 @@
-﻿namespace sqlProject.model
+﻿using Microsoft.EntityFrameworkCore;
+using sqlProject.model.configurations;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+
+namespace sqlProject.model
 {
-    internal class Answer
-    {   
+    [EntityTypeConfiguration(typeof(AnswerConfiguration))]
+    internal class Answer : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private string content;
+        private bool isCorrect;
+
         public int ID { get; set; }
-        public string Content { get; set; }
-        public bool IsCorrect { get; set; }
+        public string Content
+        {
+            get => content;
+            set
+            {
+                if (value == "")
+                {
+                    MessageBox.Show("Ошибка"); // to do : replace 
+                    return;
+                }
+                content = value;
+                using (DataContext db = new())
+                {
+                    db.Answers.Update(this);
+                    db.SaveChanges();
+                }
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content)));
+            }
+        }
+        public bool IsCorrect
+        {
+            get => isCorrect;
+            set
+            {
+                isCorrect = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCorrect)));
+            }
+        }
         public int OwnerQuestionID { get; set; }
         public Question OwnerQuestion { get; set; }
-        private List<AchievementLogging> Loggings { get; set; }
+        private ObservableCollection<AchievementLogging> Loggings { get; set; }
 
-        private Answer(string content, bool isCorrect)
+        public Answer(string content, bool isCorrect)
         {
-            Content = content;
-            IsCorrect = isCorrect;
+            this.content = content;
+            this.isCorrect = isCorrect;
         }
-        public Answer(string content, bool isCorrect, Question ownerQuestion) : this(content, isCorrect) => OwnerQuestion = ownerQuestion;
+        public Answer(int id, string content, bool isCorrect) : this(content, isCorrect) => ID = id;
 
         public override string ToString() => Content;
+     
+        public static Answer PositiveAnswer => new("Да", true);
+        public static Answer NegativeAnswer => new("Нет", false);
     }
 }

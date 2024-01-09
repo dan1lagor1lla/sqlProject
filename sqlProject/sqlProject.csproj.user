@@ -10,6 +10,9 @@
     <Compile Update="MainMenu.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="TeacherWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainMenu.xaml">
@@ -25,6 +28,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\StartUpWindowStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TeacherWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

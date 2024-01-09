@@ -168,7 +168,7 @@ namespace sqlProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsOrderRandom")
+                    b.Property<bool>("IsQuestionsOrderRandom")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
@@ -222,7 +222,7 @@ namespace sqlProject.Migrations
                         new
                         {
                             ID = 1,
-                            TypeName = "Админ"
+                            TypeName = "Учитель"
                         },
                         new
                         {

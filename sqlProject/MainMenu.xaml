@@ -65,8 +65,8 @@
         </Grid.RowDefinitions>
         <TextBox VerticalContentAlignment="Center"/>
         <ListBox Grid.Row="1" SelectionMode="Multiple">
-            <ListBoxItem Content="A"/>
-            <ListBoxItem Content="A"/>
+            <ListBoxItem Content="test number one"/>
+            <ListBoxItem Content="test number two"/>
         </ListBox>
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch"/>
         <DockPanel Grid.Column="2" Grid.RowSpan="2" LastChildFill="False">

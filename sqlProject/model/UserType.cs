@@ -9,7 +9,7 @@
         private UserType(string typeName) => TypeName = typeName;            
         private UserType(int id, string typeName) : this(typeName) => ID = id;
 
-        public static UserType Admin => new UserType(1, "Админ");
+        public static UserType Teacher => new UserType(1, "Учитель");
         public static UserType Student => new UserType(2, "Студент");
 
     }
