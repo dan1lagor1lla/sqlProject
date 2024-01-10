@@ -27,7 +27,6 @@ namespace sqlProject
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
         {
-            using (DataContext db = new()) ;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SQLitePCL;
 using sqlProject.model.configurations;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -39,7 +40,17 @@ namespace sqlProject.model
             get => isUsing;
             set
             {
+                if (value == false && OwnerTest.Questions.Count(question => question.IsUsing) == 1)
+                {
+                    MessageBox.Show("Тест должен содержать хотя бы один вопрос!"); // to do : replace
+                    return;
+                }
                 isUsing = value;
+                using (DataContext db = new())
+                {
+                    db.Questions.Update(this);
+                    db.SaveChanges();
+                }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsUsing)));
             }
         }

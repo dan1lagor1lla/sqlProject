@@ -39,7 +39,17 @@ namespace sqlProject.model
             get => isCorrect;
             set
             {
+                if (value == false && OwnerQuestion.Answers.Count(answer => answer.IsCorrect) == 1)
+                {
+                    MessageBox.Show("Вопрос должен иметь хотя бы один правильный ответ!"); // to do : replace
+                    return;
+                }
                 isCorrect = value;
+                using (DataContext db = new())
+                {
+                    db.Answers.Update(this);
+                    db.SaveChanges();
+                }
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCorrect)));
             }
         }
@@ -56,7 +66,10 @@ namespace sqlProject.model
 
         public override string ToString() => Content;
      
-        public static Answer PositiveAnswer => new("Да", true);
+        public static Answer PositiveAnswer => new("Да", true); // to do : smth with this
         public static Answer NegativeAnswer => new("Нет", false);
+        public static Answer CorrectAnswer => new("Правильный ответ", true);
+        public static Answer IncorrectAnswer => new("Неправильный ответ", false);
+
     }
 }

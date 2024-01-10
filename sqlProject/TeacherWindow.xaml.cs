@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -13,9 +14,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Win32;
 using sqlProject.model;
+
+// to do : если остался 1 вопрос при удалении вопросов он должен использоваться (IsUsing = true)
+//         same thing with answers
+//         all answers cannot be correct
 
 namespace sqlProject
 {
@@ -24,16 +28,17 @@ namespace sqlProject
     /// </summary>
     public partial class TeacherWindow : Window
     {
+        private ListBox ListOfAnswers;
         private ObservableCollection<Test> Tests = new();
 
         public TeacherWindow()
         {
             InitializeComponent();
-
+            
             using (DataContext db = new())
                 foreach (Test test in db.Tests)
                     Tests.Add(test);
-
+         
             TestList.ItemsSource = Tests;
         }
 
@@ -64,20 +69,17 @@ namespace sqlProject
 
         private void TestSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Test? selectedTest = TestList.SelectedItem as Test;
-            
-            if (selectedTest is null)
+            if (TestList.SelectedItems.Count != 1)
+            {
+                TestChanger.DataContext = null;
                 return;
+            }
+            Test selectedTest = (Test)TestList.SelectedItem;
 
             using (DataContext db = new())
             {
                 db.Tests.Update(selectedTest);
                 db.Tests.Entry(selectedTest).Collection(test => test.Questions).Load();
-                for (int i = 0; i < db.Questions.Local.Count; ++i)
-                {
-                    Question question = db.Questions.Local.ToList()[i]; 
-                    db.Questions.Entry(question).Collection(answer => answer.Answers).Load();
-                }
             }
             TestChanger.DataContext = selectedTest;
         }
@@ -97,6 +99,11 @@ namespace sqlProject
 
         private void RemoveQuestion(object sender, RoutedEventArgs e) // to do : add approve popup
         {
+            if (((Question)QuestionList.SelectedItem).OwnerTest.Questions.Count - QuestionList.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("Тест должен иметь хотя бы 1 вопрос!"); // to do : replace
+                return;
+            }
             using (DataContext db = new())
             {
                 while (QuestionList.SelectedItem is not null)
@@ -108,6 +115,7 @@ namespace sqlProject
         }
         private void TestListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, TestList, 1);
         private void QuestionListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, QuestionList, 1);
+        private void AnswerListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, ListOfAnswers, 1);
 
         private void MenuItemDisable(ContextMenu contextMenu, ListBox contextMenuOwner, int itemIndex)
         {
@@ -116,5 +124,42 @@ namespace sqlProject
             else
                 ((MenuItem)contextMenu.Items[itemIndex]).IsEnabled = true;
         }
+
+        private void AnswerListExpanded(object sender, RoutedEventArgs e)
+        {
+            Question expandedQuestion = (Question)((Expander)sender).DataContext;
+            using (DataContext db = new())
+            {
+                db.Questions.Update(expandedQuestion);
+                db.Questions.Entry(expandedQuestion).Collection(question => question.Answers).Load();
+            }
+        }
+
+        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox sndr = (TextBox)sender;
+            if (e.Key != Key.Enter)
+                return;
+            sndr.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            Keyboard.ClearFocus();
+        }
+
+        private void AddAnswer(object sender, RoutedEventArgs e)
+        {
+            Question question = (Question)((MenuItem)sender).DataContext;
+            using (DataContext db = new())
+            {
+                db.Questions.Update(question);
+                question.Answers.Add(Answer.CorrectAnswer);
+                db.SaveChanges();
+            }
+        }
+
+        private void RemoveAnswer(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ListOfAnswersLoaded(object sender, RoutedEventArgs e) => ListOfAnswers = (ListBox)sender;
     }
 }
