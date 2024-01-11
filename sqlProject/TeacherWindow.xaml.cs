@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using sqlProject.model;
 
@@ -28,131 +29,104 @@ namespace sqlProject
     /// </summary>
     public partial class TeacherWindow : Window
     {
+        private DataContext databaseContext = new();
         private ListBox ListOfAnswers;
-        private ObservableCollection<Test> Tests = new();
 
         public TeacherWindow()
         {
             InitializeComponent();
-            
-            using (DataContext db = new())
-                foreach (Test test in db.Tests)
-                    Tests.Add(test);
-         
-            TestList.ItemsSource = Tests;
-        }
 
+            databaseContext.Tests.Load();
+            ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
+        }
 
         private void AddTest(object sender, RoutedEventArgs e)
         {
-            using (DataContext db = new())
-            {
-                db.Tests.Add(Test.DefaultTest);
-                db.SaveChanges();
-                Tests.Add(db.Tests.OrderBy(test => test.ID).Last());
-            }
+            databaseContext.Tests.Add(new Test("Новый тест") 
+            { 
+                Questions = [new Question("Вопрос") 
+                { 
+                    Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)] 
+                }] 
+            });
+            databaseContext.SaveChanges();
         }
 
-        private void RemoveTest(object sender, RoutedEventArgs e) // to do : add approve popup
+        private void RemoveSelectedTests(object sender, RoutedEventArgs e) // to do : add approve popup
         {
-            using (DataContext db = new())
-            {
-                while (TestList.SelectedItem is not null)
-                {
-                    Test selectedTest = (Test)TestList.SelectedItem;
-                    db.Tests.Remove(selectedTest);
-                    Tests.Remove(selectedTest);
-                }
-                db.SaveChanges();
-            }
+            while (ListOfTests.SelectedItem is not null)
+                databaseContext.Tests.Remove((Test)ListOfTests.SelectedItem);
+            databaseContext.SaveChanges();
         }
-
+        
         private void TestSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (TestList.SelectedItems.Count != 1)
+            if (ListOfTests.SelectedItems.Count != 1)
             {
-                TestChanger.DataContext = null;
+                ListOfQuestions.ContextMenu = null;
+                ListOfQuestions.DataContext = null;
                 return;
             }
-            Test selectedTest = (Test)TestList.SelectedItem;
+            Test selectedTest = (Test)ListOfTests.SelectedItem;
+            databaseContext.Tests.Entry(selectedTest).Collection(test => test.Questions).Load();
+            
+            ListOfQuestions.ContextMenu = (ContextMenu)Resources["ListOfQuestionsContextMenu"];
+            ListOfQuestions.DataContext = selectedTest;
+        }
 
-            using (DataContext db = new())
-            {
-                db.Tests.Update(selectedTest);
-                db.Tests.Entry(selectedTest).Collection(test => test.Questions).Load();
-            }
-            TestChanger.DataContext = selectedTest;
+        private void ListOfTestsContextMenuOpened(object sender, RoutedEventArgs e)
+        {
+            ContextMenu menuSender = (ContextMenu)sender;
+            ((MenuItem)menuSender.Items[1]).IsEnabled = ListOfTests.SelectedItem is not null;
         }
 
         private void AddQuestion(object sender, RoutedEventArgs e)
         {
-            Test? selectedTest = TestList.SelectedItem as Test;
-            if (selectedTest is null)
-                return;
-            using (DataContext db = new())
-            {
-                db.Tests.Update(selectedTest);
-                selectedTest.Questions.Add(Question.DefaultQuestion);
-                db.SaveChanges();
-            }
+            ((Test)ListOfQuestions.DataContext).Questions.Add(new Question("Вопрос") 
+            { 
+                Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)] 
+            });
+            databaseContext.SaveChanges();
         }
 
-        private void RemoveQuestion(object sender, RoutedEventArgs e) // to do : add approve popup
+        private void RemoveSelectedQuestions(object sender, RoutedEventArgs e) // to do : add approve popup
         {
-            if (((Question)QuestionList.SelectedItem).OwnerTest.Questions.Count - QuestionList.SelectedItems.Count <= 0)
+            if (((Test)ListOfQuestions.DataContext).Questions.Count - ListOfQuestions.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Тест должен иметь хотя бы 1 вопрос!"); // to do : replace
+                MessageBox.Show("Тест должен иметь хотя бы один вопрос!"); // to do : replace
                 return;
             }
-            using (DataContext db = new())
+            while (ListOfQuestions.SelectedItem is not null)
             {
-                while (QuestionList.SelectedItem is not null)
-                {
-                    db.Questions.Remove((Question)QuestionList.SelectedItem);
-                    db.SaveChanges();
-                }
+                databaseContext.Questions.Remove((Question)ListOfQuestions.SelectedItem);
+                databaseContext.SaveChanges();
             }
         }
-        private void TestListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, TestList, 1);
-        private void QuestionListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, QuestionList, 1);
-        private void AnswerListContextMenuOpened(object sender, RoutedEventArgs e) => MenuItemDisable((ContextMenu)sender, ListOfAnswers, 1);
 
-        private void MenuItemDisable(ContextMenu contextMenu, ListBox contextMenuOwner, int itemIndex)
+        private void ListOfQuestionsContextMenuOpened(object sender, RoutedEventArgs e)
         {
-            if (contextMenuOwner.SelectedItem is null)
-                ((MenuItem)contextMenu.Items[itemIndex]).IsEnabled = false;
-            else
-                ((MenuItem)contextMenu.Items[itemIndex]).IsEnabled = true;
+            ContextMenu menuSender = (ContextMenu)sender;
+            ((MenuItem)menuSender.Items[1]).IsEnabled = ListOfQuestions.SelectedItem is not null;
         }
 
-        private void AnswerListExpanded(object sender, RoutedEventArgs e)
+        private void ListOfAnswersExpanded(object sender, RoutedEventArgs e)
         {
             Question expandedQuestion = (Question)((Expander)sender).DataContext;
-            using (DataContext db = new())
-            {
-                db.Questions.Update(expandedQuestion);
-                db.Questions.Entry(expandedQuestion).Collection(question => question.Answers).Load();
-            }
+            databaseContext.Questions.Entry(expandedQuestion).Collection(question => question.Answers).Load();
         }
 
-        private void TextBoxKeyDown(object sender, KeyEventArgs e)
+        private void UpdateSourceOfTextProperty(object sender, KeyEventArgs e)
         {
-            TextBox sndr = (TextBox)sender;
             if (e.Key != Key.Enter)
                 return;
-            sndr.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            ((TextBox)sender).GetBindingExpression(TextBox.TextProperty).UpdateSource();
             Keyboard.ClearFocus();
         }
 
         private void AddAnswer(object sender, RoutedEventArgs e)
         {
-            Question question = (Question)((MenuItem)sender).DataContext;
-            using (DataContext db = new())
-            {
-                db.Questions.Update(question);
-                question.Answers.Add(Answer.CorrectAnswer);
-                db.SaveChanges();
-            }
+            ((Question)((MenuItem)sender).DataContext).Answers.Add(new Answer("Неверный ответ", false));
+            databaseContext.SaveChanges();
         }
 
         private void RemoveAnswer(object sender, RoutedEventArgs e)
@@ -160,6 +134,10 @@ namespace sqlProject
 
         }
 
-        private void ListOfAnswersLoaded(object sender, RoutedEventArgs e) => ListOfAnswers = (ListBox)sender;
+        private void ListOfAnswersLoaded(object sender, RoutedEventArgs e)
+        {
+            ListOfAnswers = (ListBox)sender;
+            Debug.WriteLine("load");
+        }
     }
 }

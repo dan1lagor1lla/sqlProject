@@ -64,8 +64,5 @@ namespace sqlProject.model
             this.isUsing = isUsing;
             Answers = new();
         }
-        public Question(int id, string content, bool isUsing = true) : this(content, isUsing) => ID = id;
-        public static Question DefaultQuestion => new("Новый вопрос") { Answers = [Answer.PositiveAnswer, Answer.NegativeAnswer] };
-
     }
 }

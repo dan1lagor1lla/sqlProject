@@ -20,7 +20,7 @@ namespace sqlProject.model
             {
                 if (value == "")
                 {
-                    MessageBox.Show("Ошибка!"); // todo : replace
+                    MessageBox.Show("Ошибка!"); // to do : replace
                     return;
                 }
                 name = value;
@@ -48,10 +48,7 @@ namespace sqlProject.model
             this.name = name;
             this.isQuestionsOrderRandom = isQuestionsOrderRandom;
         }
-        public Test(int id, string name, bool isQuestionsOrderRandom = true) : this(name, isQuestionsOrderRandom) => ID = id;
 
         public override string ToString() => Name;
-
-        public static Test DefaultTest => new("Новый тест") { Questions = [Question.DefaultQuestion] };
     }
 }

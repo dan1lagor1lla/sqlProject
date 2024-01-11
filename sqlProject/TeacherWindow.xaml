@@ -10,17 +10,13 @@
         MinHeight="400"
         FontSize="40">
     <Window.Resources>
-        <ContextMenu x:Key="TestListContextMenu" Opened="TestListContextMenuOpened">
+        <ContextMenu x:Key="ListOfTestsContextMenu" Opened="ListOfTestsContextMenuOpened">
             <MenuItem Header="Добавить тест" Click="AddTest"/>
-            <MenuItem Header="Удалить тест" Click="RemoveTest"/>
+            <MenuItem Header="Удалить выделенные тесты" Click="RemoveSelectedTests"/>
         </ContextMenu>
-        <ContextMenu x:Key="QuestionListContextMenu" Opened="QuestionListContextMenuOpened">
+        <ContextMenu x:Key="ListOfQuestionsContextMenu" Opened="ListOfQuestionsContextMenuOpened">
             <MenuItem Header="Добавить вопрос" Click="AddQuestion"/>
-            <MenuItem Header="Удалить вопрос" Click="RemoveQuestion"/>
-        </ContextMenu>
-        <ContextMenu x:Key="AnswerListContextMenu" Opened="AnswerListContextMenuOpened">
-            <MenuItem Header="Добавить ответ" Click="AddAnswer"/>
-            <MenuItem Header="Удалить ответ" Click="RemoveAnswer"/>
+            <MenuItem Header="Удалить выделенные вопросы" Click="RemoveSelectedQuestions"/>
         </ContextMenu>
     </Window.Resources>
     
@@ -38,10 +34,10 @@
         </Grid.RowDefinitions>
 
         <ListBox
-            Name="TestList"
-            SelectionMode="Extended"
+            Name="ListOfTests"
             SelectionChanged="TestSelectionChanged"
-            ContextMenu="{StaticResource TestListContextMenu}"
+            ContextMenu="{StaticResource ListOfTestsContextMenu}"
+            SelectionMode="Multiple"
             VirtualizingStackPanel.IsVirtualizing="True"
             VirtualizingStackPanel.ScrollUnit="Pixel">
             <ListBox.ItemTemplate>
@@ -49,12 +45,11 @@
                     <StackPanel>
                         <TextBox
                             Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                            ContextMenu="{StaticResource TestListContextMenu}"
+                            KeyDown="UpdateSourceOfTextProperty"
+                            MaxLength="15"
                             Background="Transparent"
                             BorderThickness="0"
-                            MaxLength="15"
-                            Padding="5 10"
-                            KeyDown="TextBoxKeyDown"/>
+                            Padding="5 10"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -67,30 +62,27 @@
         
         <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5"/>
         
-        <Grid Name="TestChanger" Grid.Column="2">
+        <Grid Grid.Column="2">
             <ListBox
-                Name="QuestionList"
+                Name="ListOfQuestions"
                 ItemsSource="{Binding Path=Questions}"
-                ContextMenu="{StaticResource QuestionListContextMenu}"
-                SelectionMode="Extended"
-                VirtualizingStackPanel.ScrollUnit="Pixel"
-                HorizontalContentAlignment="Stretch">
+                SelectionMode="Multiple"
+                HorizontalContentAlignment="Stretch"
+                VirtualizingStackPanel.ScrollUnit="Pixel">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Expander
-                            Expanded="AnswerListExpanded">
+                        <Expander Expanded="ListOfAnswersExpanded">
                             <Expander.Header>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                                     <TextBox
                                         Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                        KeyDown="TextBoxKeyDown"/>
+                                        KeyDown="UpdateSourceOfTextProperty"/>
                                     <CheckBox IsChecked="{Binding Path=IsUsing}"/>
                                 </StackPanel>
                             </Expander.Header>
                             <ListBox
                                 Loaded="ListOfAnswersLoaded"
                                 ItemsSource="{Binding Path=Answers}"
-                                ContextMenu="{StaticResource AnswerListContextMenu}"
                                 DisplayMemberPath="Content"
                                 BorderThickness="0">
                                 <ListBox.ItemTemplate>
@@ -98,8 +90,7 @@
                                         <StackPanel Orientation="Horizontal">
                                             <TextBox
                                                 Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                                ContextMenu="{StaticResource AnswerListContextMenu}"
-                                                KeyDown="TextBoxKeyDown"/>
+                                                KeyDown="UpdateSourceOfTextProperty"/>
                                             <CheckBox IsChecked="{Binding Path=IsCorrect}"/>
                                         </StackPanel>
                                     </DataTemplate>

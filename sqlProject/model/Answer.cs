@@ -62,14 +62,7 @@ namespace sqlProject.model
             this.content = content;
             this.isCorrect = isCorrect;
         }
-        public Answer(int id, string content, bool isCorrect) : this(content, isCorrect) => ID = id;
 
         public override string ToString() => Content;
-     
-        public static Answer PositiveAnswer => new("Да", true); // to do : smth with this
-        public static Answer NegativeAnswer => new("Нет", false);
-        public static Answer CorrectAnswer => new("Правильный ответ", true);
-        public static Answer IncorrectAnswer => new("Неправильный ответ", false);
-
     }
 }
