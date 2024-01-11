@@ -20,13 +20,19 @@ namespace sqlProject
     /// </summary>
     public partial class MainMenu : Window
     {
+        private DataContext databaseContext = new();
+        
         public MainMenu()
         {
             InitializeComponent();
+
+            databaseContext.Tests.Load();
+            ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
         }
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
         {
         }
+
     }
 }

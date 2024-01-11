@@ -15,7 +15,10 @@
         <Style TargetType="Button">
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
-        
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
         <ControlTemplate x:Key="CircleButton" TargetType="Button">
             <Border Name="border" CornerRadius="25" BorderThickness="1" Background="Black">
                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" Height="50"/>
@@ -63,13 +66,12 @@
             <RowDefinition MinHeight="100" Height="0.2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <TextBox VerticalContentAlignment="Center"/>
-        <ListBox Grid.Row="1" SelectionMode="Multiple">
-            <ListBoxItem Content="test number one"/>
-            <ListBoxItem Content="test number two"/>
-        </ListBox>
+        <ListBox Name="ListOfTests" Grid.Row="1"/>
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch"/>
-        <DockPanel Grid.Column="2" Grid.RowSpan="2" LastChildFill="False">
+        
+        <!--<DockPanel Grid.Column="2" Grid.RowSpan="2" LastChildFill="False">
             <DockPanel DockPanel.Dock="Top">
                 <TextBox Margin="10" DockPanel.Dock="Top"/>
                 <PasswordBox Margin="10" DockPanel.Dock="Top" Grid.Column="1"/>
@@ -79,6 +81,6 @@
                     <Run Text="Создать аккаунт" Cursor="Hand" TextDecorations="Underline" FontWeight="Bold"/>
                 </TextBlock>
             </DockPanel>
-        </DockPanel>
+        </DockPanel>-->
     </Grid>
 </Window>

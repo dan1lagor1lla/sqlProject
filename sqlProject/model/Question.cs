@@ -27,11 +27,7 @@ namespace sqlProject.model
                     return;
                 }
                 content = value;
-                using (DataContext db = new())
-                {
-                    db.Questions.Update(this);
-                    db.SaveChanges();
-                }
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content)));
             }
         }
@@ -46,11 +42,7 @@ namespace sqlProject.model
                     return;
                 }
                 isUsing = value;
-                using (DataContext db = new())
-                {
-                    db.Questions.Update(this);
-                    db.SaveChanges();
-                }
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsUsing)));
             }
         }
@@ -63,6 +55,15 @@ namespace sqlProject.model
             this.content = content;
             this.isUsing = isUsing;
             Answers = new();
+        }
+
+        private void UpdateInDatabase()
+        {
+            using (DataContext db = new())
+            {
+                db.Questions.Update(this);
+                db.SaveChanges();
+            }
         }
     }
 }

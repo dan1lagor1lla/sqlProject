@@ -24,11 +24,7 @@ namespace sqlProject.model
                     return;
                 }
                 name = value;
-                using (DataContext db = new())
-                {
-                    db.Tests.Update(this);
-                    db.SaveChanges();
-                }
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Name)));
             }
         }
@@ -37,7 +33,8 @@ namespace sqlProject.model
             get => isQuestionsOrderRandom;
             set
             {
-                IsQuestionsOrderRandom = value;
+                isQuestionsOrderRandom = value;
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsQuestionsOrderRandom)));
             }
         }
@@ -49,6 +46,14 @@ namespace sqlProject.model
             this.isQuestionsOrderRandom = isQuestionsOrderRandom;
         }
 
+        private void UpdateInDatabase()
+        {
+            using (DataContext db = new())
+            {
+                db.Tests.Update(this);
+                db.SaveChanges();
+            }
+        }
         public override string ToString() => Name;
     }
 }

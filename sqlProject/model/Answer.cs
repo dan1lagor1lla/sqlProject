@@ -26,11 +26,7 @@ namespace sqlProject.model
                     return;
                 }
                 content = value;
-                using (DataContext db = new())
-                {
-                    db.Answers.Update(this);
-                    db.SaveChanges();
-                }
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content)));
             }
         }
@@ -45,11 +41,7 @@ namespace sqlProject.model
                     return;
                 }
                 isCorrect = value;
-                using (DataContext db = new())
-                {
-                    db.Answers.Update(this);
-                    db.SaveChanges();
-                }
+                UpdateInDatabase();
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsCorrect)));
             }
         }
@@ -61,6 +53,15 @@ namespace sqlProject.model
         {
             this.content = content;
             this.isCorrect = isCorrect;
+        }
+
+        private void UpdateInDatabase()
+        {
+            using (DataContext db = new())
+            {
+                db.Answers.Update(this);
+                db.SaveChanges();
+            }
         }
 
         public override string ToString() => Content;
