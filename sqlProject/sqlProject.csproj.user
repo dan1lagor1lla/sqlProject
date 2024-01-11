@@ -18,7 +18,7 @@
     <Page Update="MainMenu.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="SignInWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\DarkThemeColors.xaml">
@@ -27,7 +27,7 @@
     <Page Update="styles\LightThemeColors.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\StartUpWindowStyle.xaml">
+    <Page Update="styles\RoundedStyles.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TeacherWindow.xaml">

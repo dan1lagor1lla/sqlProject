@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.EntityFrameworkCore;
+using sqlProject.model;
 
 namespace sqlProject
 {
@@ -21,11 +22,13 @@ namespace sqlProject
     public partial class MainMenu : Window
     {
         private DataContext databaseContext = new();
-        
-        public MainMenu()
+        private User student;
+
+        internal MainMenu(User student)
         {
             InitializeComponent();
 
+            this.student = student;
             databaseContext.Tests.Load();
             ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
         }
