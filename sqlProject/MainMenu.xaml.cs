@@ -29,13 +29,17 @@ namespace sqlProject
             InitializeComponent();
 
             this.student = student;
+            databaseContext.Users.Update(student);
+            databaseContext.Logging.Add(new Logging(student, databaseContext.LoggingTypes.Single(logType => logType.ID == 1)));
+            databaseContext.SaveChanges();
+
             databaseContext.Tests.Load();
             ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
         }
 
         private void ChangeTheme(object sender, RoutedEventArgs e)
         {
-        }
 
+        }
     }
 }

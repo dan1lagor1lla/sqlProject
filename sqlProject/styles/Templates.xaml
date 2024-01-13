@@ -1,0 +1,83 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ControlTemplate
+        x:Key="RoundedTextBoxTemplate"
+        TargetType="TextBox">
+        <Border
+            Name="border"
+            Width="{TemplateBinding Width}"
+            MaxWidth="{TemplateBinding MaxWidth}"
+            MinWidth="{TemplateBinding MaxWidth}"
+            Height="{TemplateBinding Height}"
+            MaxHeight="{TemplateBinding MaxHeight}"
+            MinHeight="{TemplateBinding MinHeight}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Margin="{TemplateBinding Margin}"
+            Padding="{TemplateBinding Padding}"
+            Cursor="{TemplateBinding Cursor}"
+            CornerRadius="7.5">
+            <ScrollViewer
+                Name="PART_ContentHost"/>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate
+        x:Key="RoundedButtonTemplate"
+        TargetType="Button">
+        <Border
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Margin="{TemplateBinding Margin}"
+            MaxWidth="{TemplateBinding MaxWidth}"
+            Cursor="{TemplateBinding Cursor}"
+            Padding="{TemplateBinding Padding}"
+            CornerRadius="10">
+            <ContentPresenter
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                Content="{TemplateBinding Content}"/>
+        </Border>
+    </ControlTemplate>
+    <!--<ControlTemplate
+        x:Key="WindowTemplate"
+        TargetType="Window">
+        <Border
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackPanel FlowDirection="RightToLeft" MouseLeftButtonDown="DragWindow" Background="{TemplateBinding Foreground}" Grid.Row="0" Orientation="Horizontal">
+                    <Button Height="33.3" Width="33.3" BorderThickness="0">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button" >
+                                <Border Name="border" Height="33.3" Width="33.3">
+                                    <ContentControl>
+                                        <ContentControl.Content>x
+                                        </ContentControl.Content>
+                                    </ContentControl>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="Red"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+                <AdornerDecorator Grid.Row="1">
+                    <ContentPresenter/>
+                </AdornerDecorator>
+            </Grid>
+        </Border>
+    </ControlTemplate>-->
+</ResourceDictionary>

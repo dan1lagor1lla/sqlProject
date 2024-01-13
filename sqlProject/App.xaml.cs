@@ -9,6 +9,18 @@ namespace sqlProject
     /// </summary>
     public partial class App : Application
     {
+        public Theme CurrentTheme => Resources.MergedDictionaries[2].Source.ToString().Contains("LightThemeColors.xaml") ? Theme.Light : Theme.Dark;
+        public App() { }
+
+        public void ChangeTheme()
+        {
+            Resources.MergedDictionaries[2] = new ResourceDictionary() { Source = new Uri("styles\\" + (CurrentTheme == Theme.Dark ? "Light" : "Dark") + "ThemeColors.xaml", UriKind.Relative) };
+        }
     }
 
+    public enum Theme
+    {
+        Dark = 0,
+        Light = 1
+    }
 }

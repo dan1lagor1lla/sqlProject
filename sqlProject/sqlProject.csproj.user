@@ -21,13 +21,16 @@
     <Page Update="SignInWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="styles\BaseStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="styles\DarkThemeColors.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\LightThemeColors.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\RoundedStyles.xaml">
+    <Page Update="styles\Templates.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TeacherWindow.xaml">

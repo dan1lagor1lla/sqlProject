@@ -8,96 +8,78 @@
         Title="StartUpWindow"
         Height="750"
         Width="750"
+        MinHeight="550"
+        MinWidth="550"
         FontSize="40"
         FontFamily="Georgia"
         WindowStyle="ToolWindow"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <ResourceDictionary Source="styles\RoundedStyles.xaml"/>
+        <Style
+            TargetType="TextBlock"
+            BasedOn="{StaticResource TextBlockBaseStyle}">
+            <Setter
+                Property="TextAlignment"
+                Value="Center"/>
+            <Setter
+                Property="Margin"
+                Value="0, 15"/>
+        </Style>
+        <Style
+            TargetType="TextBox"
+            BasedOn="{StaticResource TextBoxBaseStyle}">
+            <Setter
+                Property="Padding"
+                Value="10"/>
+            <Setter
+                Property="FontSize"
+                Value="30"/>
+            <Setter
+                Property="Margin"
+                Value="0, 3.5"/>
+            <Setter
+                Property="MaxWidth"
+                Value="450"/>
+        </Style>
+        <Style
+            TargetType="Button"
+            BasedOn="{StaticResource ButtonBaseStyle}">
+            <Setter
+                Property="BorderThickness"
+                Value="0"/>
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
+        </Style>
     </Window.Resources>
-    <!--<Window.Template>
-        <ControlTemplate TargetType="Window">
-            <Border
-                Width="{TemplateBinding Width}"
-                Height="{TemplateBinding Height}"
-                Background="{TemplateBinding Background}"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel FlowDirection="RightToLeft" MouseLeftButtonDown="DragWindow" Background="{TemplateBinding Foreground}" Grid.Row="0" Orientation="Horizontal">
-                        <Button Height="33.3" Width="33.3" BorderThickness="0">
-                            <Button.Template>
-                                <ControlTemplate TargetType="Button" >
-                                    <Border Name="border" Height="33.3" Width="33.3">
-                                        <ContentControl>
-                                            <ContentControl.Content>x
-                                            </ContentControl.Content>
-                                        </ContentControl>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="border" Property="Background" Value="Red"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Button.Template>
-                        </Button>
-                    </StackPanel>
-                    <AdornerDecorator Grid.Row="1">
-                        <ContentPresenter/>
-                    </AdornerDecorator>
-                </Grid>
-            </Border>
-        </ControlTemplate>
-    </Window.Template>-->
-    <StackPanel
+    <Grid
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="100 0">
-        <TextBlock
-            Text="Авторизируйтесь, чтобы начать"
-            Style="{DynamicResource TextStyle}"
-            TextWrapping="Wrap"
-            Margin="0, 15"
-            TextAlignment="Center"/>
-        <TextBox
-            Name="NameInput"
-            Style="{DynamicResource RoundedTextBox}"
-            Padding="15"
-            Margin="0 3.5"
-            FontSize="30"/>
-        <TextBox
-            Name="PasswordInput"
-            FontSize="30"
-            Style="{DynamicResource RoundedTextBox}"
-            Padding="15"
-            Margin="0 3.5">
-        </TextBox>
-        <Button
-            Style="{DynamicResource RoundedButton}"
-            Content="Войти"
-            Click="TryLogIn"
-            BorderThickness="0"
-            FontSize="25"
-            Padding="0 12.5"
-            Margin="0 5"
-            MaxWidth="150"
-            Cursor="Hand"/>
-        <TextBlock
-            FontSize="25"
-            TextAlignment="Center"
-            Margin="0 15"
-            Style="{DynamicResource TextStyle}">
-            <Run
-                Text="Впервые здесь?"/>
-            <Run 
-                Text="Создать аккаунт" 
-                Cursor="Hand"
-                TextDecorations="Underline"/>
-        </TextBlock>
-    </StackPanel>
+        <StackPanel>
+            <TextBlock
+                Text="Авторизируйтесь, чтобы начать"
+                TextWrapping="Wrap"/>
+            <TextBox
+                Name="NameInput"/>
+            <TextBox
+                Name="PasswordInput"/>
+            <Button
+                Content="Войти"
+                Click="TryLogIn"
+                FontSize="25"
+                Padding="0, 15"
+                Margin="0, 5"
+                MaxWidth="150"/>
+            <TextBlock
+                FontSize="25">
+                <Run
+                    Text="Впервые здесь?"/>
+                <Run 
+                    Text="Создать аккаунт" 
+                    Cursor="Hand"
+                    TextDecorations="Underline"/>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
 </Window>

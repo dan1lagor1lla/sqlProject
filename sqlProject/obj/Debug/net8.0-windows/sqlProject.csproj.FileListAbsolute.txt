@@ -184,6 +184,7 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TeacherWindow.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TeacherWindow.baml
-C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\RoundedStyles.baml
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\SignInWindow.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\SignInWindow.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\BaseStyles.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\Templates.baml

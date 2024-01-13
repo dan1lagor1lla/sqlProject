@@ -14,7 +14,7 @@ namespace sqlProject
         public DbSet<LoggingType> LoggingTypes { get; private set; } = null!;
         public DbSet<AchievementLogging> AchievementLogging { get; private set; } = null!;
 
-        public DataContext() { Database.EnsureCreated(); }
+        public DataContext() { }
     
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,8 +22,8 @@ namespace sqlProject
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<UserType>().HasData(UserType.Teacher, UserType.Student);
-            modelBuilder.Entity<LoggingType>().HasData(LoggingType.Login, LoggingType.Logout);
+            modelBuilder.Entity<UserType>().HasData([new UserType(1, "Учитель"), new UserType(2, "Студент")]);
+            modelBuilder.Entity<LoggingType>().HasData([new LoggingType(1, "Вход"), new LoggingType(2, "Выход")]);
         }
     }
 }
