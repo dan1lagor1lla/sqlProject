@@ -2,13 +2,13 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:sqlProject"
-             StartupUri="SignInWindow.xaml">
+             StartupUri="TeacherWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="styles\Templates.xaml"/>
                 <ResourceDictionary Source="styles\BaseStyles.xaml"/>
-                <ResourceDictionary Source="styles\LightThemeColors.xaml"/>
+                <ResourceDictionary Source="styles\DarkThemeColors.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

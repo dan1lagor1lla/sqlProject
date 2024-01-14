@@ -18,7 +18,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using sqlProject.model;
 
-// to do : all answers cannot be correct? or can be
+// to do : tool tip on unenabled button
+//         some requierments for input & advices what matter with incorrect inputs
+//         all answers cannot be correct? or can be
 
 namespace sqlProject
 {

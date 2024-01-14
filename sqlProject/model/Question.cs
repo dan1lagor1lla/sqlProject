@@ -23,7 +23,8 @@ namespace sqlProject.model
             {
                 if (value == "")
                 {
-                    MessageBox.Show("Ошибка"); // to do : replace
+                    MessageBox.Show("Ошибка"); //
+                                               // : replace
                     return;
                 }
                 content = value;

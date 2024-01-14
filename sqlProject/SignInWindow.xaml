@@ -10,9 +10,7 @@
         Width="750"
         MinHeight="550"
         MinWidth="550"
-        FontSize="40"
-        FontFamily="Georgia"
-        WindowStyle="ToolWindow"
+        WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
         <Style
@@ -37,9 +35,6 @@
             <Setter
                 Property="Margin"
                 Value="0, 3.5"/>
-            <Setter
-                Property="MaxWidth"
-                Value="450"/>
         </Style>
         <Style
             TargetType="Button"
@@ -50,35 +45,46 @@
             <Setter
                 Property="Cursor"
                 Value="Hand"/>
+            <Setter
+                Property="MaxWidth"
+                Value="150"/>
+            <Setter
+                Property="FontSize"
+                Value="25"/>
         </Style>
     </Window.Resources>
     <Grid
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="100 0">
-        <StackPanel>
+        <StackPanel
+            MaxWidth="595">
             <TextBlock
                 Text="Авторизируйтесь, чтобы начать"
                 TextWrapping="Wrap"/>
             <TextBox
-                Name="NameInput"/>
+                Name="NameInput"
+                TextChanged="InputChanged"/>
             <TextBox
-                Name="PasswordInput"/>
+                Name="PasswordInput"
+                TextChanged="InputChanged"/>
             <Button
+                Name="TryLogInButton"
                 Content="Войти"
                 Click="TryLogIn"
-                FontSize="25"
                 Padding="0, 15"
                 Margin="0, 5"
-                MaxWidth="150"/>
+                IsEnabled="False">
+            </Button>
             <TextBlock
-                FontSize="25">
+                FontSize="25"
+                TextWrapping="Wrap">
                 <Run
                     Text="Впервые здесь?"/>
                 <Run 
-                    Text="Создать аккаунт" 
-                    Cursor="Hand"
-                    TextDecorations="Underline"/>
+                    Text="Создать аккаунт"
+                    MouseDown="SignUp"
+                    Style="{DynamicResource HighlightRunStyle}"/>
             </TextBlock>
         </StackPanel>
     </Grid>

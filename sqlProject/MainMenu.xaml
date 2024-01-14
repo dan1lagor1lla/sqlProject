@@ -5,55 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        Title="MainMenu" Height="700" Width="700"
-        FontSize="50"
+        Title="MainMenu"
+        Height="700"
+        Width="700"
         MinWidth="815"
         MinHeight="500"
-        FontFamily="Georgia">
+        FontSize="50"
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        
-        <Style TargetType="Button">
-            <Setter Property="Cursor" Value="Hand"/>
+        <Style
+            BasedOn="{StaticResource ButtonBaseStyle}"
+            TargetType="Button"/>
+        <Style
+            TargetType="ListBoxItem">
+            <Setter
+                Property="Cursor"
+                Value="Hand"/>
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
         </Style>
-        <Style TargetType="ListBoxItem">
-            <Setter Property="Cursor" Value="Hand"/>
+        <Style
+            TargetType="ListBox">
+            <Setter
+                Property="Background"
+                Value="Transparent"/>
         </Style>
-
-        <ControlTemplate x:Key="CircleButton" TargetType="Button">
-            <Border Name="border" CornerRadius="25" BorderThickness="1" Background="Black">
-                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Content="{TemplateBinding Content}" Height="50"/>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="border" Property="Background" Value="#232323"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter TargetName="border" Property="Background" Value="#303030"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        
-        <ControlTemplate x:Key="CircleTextBox" TargetType="TextBox">
-            <Border Name="border" CornerRadius="15" Background="#DDDDDD" BorderThickness="0">
-                <TextBox Background="Transparent" BorderThickness="0"/>
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroup>
-                        <VisualState Name="Normal"/>
-                    </VisualStateGroup>
-                </VisualStateManager.VisualStateGroups>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter TargetName="border" Property="Background" Value="#f2f2f2"/>
-                </Trigger>
-                <Trigger Property="IsMouseCaptured" Value="True">
-                    <Setter TargetName="border" Property="Background" Value="Transparent"/>
-                    <Setter TargetName="border" Property="BorderThickness" Value="5"/>
-                    <Setter TargetName="border" Property="BorderBrush" Value="#7f7f7f"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        
+        <Style
+            BasedOn="{StaticResource TextBoxBaseStyle}"
+            TargetType="TextBox"/>
     </Window.Resources>
     
     <Grid>
@@ -69,6 +50,7 @@
         
         <TextBox VerticalContentAlignment="Center"/>
         <ListBox Name="ListOfTests" Grid.Row="1"/>
+        
         <GridSplitter Grid.Column="1" Grid.RowSpan="2" Width="5" HorizontalAlignment="Stretch"/>
         
         <!--<DockPanel Grid.Column="2" Grid.RowSpan="2" LastChildFill="False">

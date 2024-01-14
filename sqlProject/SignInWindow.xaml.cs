@@ -21,24 +21,34 @@ namespace sqlProject
 
         private void TryLogIn(object sender, RoutedEventArgs e)
         {
-            ((App)Application.Current).ChangeTheme();
+            //((App)Application.Current).ChangeTheme();
             using (DataContext db = new())
             {
                 User? user = db.Users.FirstOrDefault(user => user.Name == NameInput.Text);
                 if (user is null)
                 {
-                    MessageBox.Show("Пользователя с данным именем не найдено!");
+                    MessageBox.Show("Пользователя с данным именем не найдено!"); // to do : replace 
                     return;
                 }
                 if (user.Password != PasswordInput.Text)
                 {
-                    MessageBox.Show("Неверный пароль!");
+                    MessageBox.Show("Неверный пароль!"); // to do : replace 
                     return;
                 }
-                MainMenu mainMenu = new(user);
-                mainMenu.Show();
+                new MainMenu(user).Show();
                 Close();
             }
+        }
+
+        private void SignUp(object sender, MouseButtonEventArgs e)
+        {
+            new SignUpWindow().Show();
+            Close();
+        }
+
+        private void InputChanged(object sender, TextChangedEventArgs e)
+        {
+            TryLogInButton.IsEnabled = NameInput.Text.Length < 6 || PasswordInput.Text.Length < 6 ? false : true;
         }
     }
 }
