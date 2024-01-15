@@ -190,3 +190,4 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\Templates.baml
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\SignUpWindow.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\SignUpWindow.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs

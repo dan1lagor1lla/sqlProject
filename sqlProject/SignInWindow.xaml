@@ -13,32 +13,35 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <Style
-            TargetType="TextBlock"
-            BasedOn="{StaticResource TextBlockBaseStyle}">
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockBaseStyle}">
             <Setter
                 Property="TextAlignment"
                 Value="Center"/>
             <Setter
-                Property="Margin"
-                Value="0, 15"/>
+                Property="TextWrapping"
+                Value="Wrap"/>
         </Style>
-        <Style
-            TargetType="TextBox"
-            BasedOn="{StaticResource TextBoxBaseStyle}">
-            <Setter
-                Property="Padding"
-                Value="10"/>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource TextBoxWithPlaceholderBaseStyle}">
             <Setter
                 Property="FontSize"
-                Value="30"/>
+                Value="25"/>
             <Setter
                 Property="Margin"
-                Value="0, 3.5"/>
+                Value="0,3.5"/>
+            <Setter
+                Property="Padding"
+                Value="7.5,10"/>
+            <EventSetter
+                Event="TextChanged"
+                Handler="InputChanged"/>
         </Style>
-        <Style
-            TargetType="Button"
-            BasedOn="{StaticResource ButtonBaseStyle}">
+        <Style TargetType="Button"
+               BasedOn="{StaticResource ButtonBaseStyle}">
+            <Setter
+                Property="FontSize"
+                Value="20"/>
             <Setter
                 Property="BorderThickness"
                 Value="0"/>
@@ -46,11 +49,8 @@
                 Property="Cursor"
                 Value="Hand"/>
             <Setter
-                Property="MaxWidth"
-                Value="150"/>
-            <Setter
-                Property="FontSize"
-                Value="25"/>
+                Property="Padding"
+                Value="0,15"/>
         </Style>
     </Window.Resources>
     <Grid
@@ -61,27 +61,26 @@
             MaxWidth="595">
             <TextBlock
                 Text="Авторизируйтесь, чтобы начать"
-                TextWrapping="Wrap"/>
+                Margin="0,0,0,25"/>
             <TextBox
                 Name="NameInput"
-                TextChanged="InputChanged"/>
+                Uid="Логин"/>
             <TextBox
                 Name="PasswordInput"
-                TextChanged="InputChanged"/>
+                Uid="Пароль"/>
             <Button
                 Name="TryLogInButton"
                 Content="Войти"
                 Click="TryLogIn"
-                Padding="0, 15"
                 Margin="0, 5"
                 IsEnabled="False">
             </Button>
             <TextBlock
-                FontSize="25"
-                TextWrapping="Wrap">
+                FontSize="20"
+                Margin="0,15,0,0">
                 <Run
                     Text="Впервые здесь?"/>
-                <Run 
+                <Run
                     Text="Создать аккаунт"
                     MouseDown="SignUp"
                     Style="{DynamicResource HighlightRunStyle}"/>

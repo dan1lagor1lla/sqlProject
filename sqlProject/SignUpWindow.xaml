@@ -13,44 +13,62 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <Style
-            BasedOn="{StaticResource TextBlockBaseStyle}"
-            TargetType="TextBlock">
-            <Setter
-                Property="FontSize"
-                Value="30"/>
-            <Setter
-                Property="Margin"
-                Value="0,10"/>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockBaseStyle}">
             <Setter
                 Property="TextWrapping"
                 Value="Wrap"/>
+            <Setter
+                Property="TextAlignment"
+                Value="Center"/>
         </Style>
-        <Style
-            BasedOn="{StaticResource TextBoxBaseStyle}"
-            TargetType="TextBox">
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource TextBoxWithPlaceholderBaseStyle}">
             <Setter
                 Property="Padding"
                 Value="7.5,10"/>
             <Setter
                 Property="FontSize"
                 Value="25"/>
+            <Setter
+                Property="Margin"
+                Value="0,3.5"/>
+            <EventSetter
+                Event="TextChanged"
+                Handler="InputChanged"/>
         </Style>
-        <Style
-            BasedOn="{StaticResource ButtonBaseStyle}"
-            TargetType="Button">
+        <Style TargetType="Button"
+               BasedOn="{StaticResource ButtonBaseStyle}">
             <Setter
                 Property="FontSize"
                 Value="20"/>
             <Setter
-                Property="Padding"
-                Value="0,15"/>
-            <Setter
-                Property="MaxWidth"
-                Value="130"/>
-            <Setter
                 Property="Cursor"
                 Value="Hand"/>
+            <Setter
+                Property="BorderThickness"
+                Value="0"/>
+            <Setter
+                Property="Padding"
+                Value="0,15"/>
+        </Style>
+        <Style x:Key="AdviceTextBlock"
+               TargetType="TextBlock">
+            <Setter
+                Property="FontSize"
+                Value="17.5"/>
+            <Setter
+                Property="TextAlignment"
+                Value="Left"/>
+            <Setter
+                Property="Margin"
+                Value="0,3,0,10"/>
+            <Setter
+                Property="Visibility"
+                Value="Collapsed"/>
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource AlarmBrush}"/>
         </Style>
     </Window.Resources>
     <Grid
@@ -61,19 +79,22 @@
             MaxWidth="500">
             <TextBlock
                 Text="Создание аккаунта"
-                TextAlignment="Center"
-                FontSize="40"
-                Margin="0,0,0,15"/>
-            <TextBlock
-                Text="Имя"/>
+                Margin="0,0,0,25"/>
             <TextBox
                 Name="NameInput"
-                TextChanged="InputChanged"/>
+                Uid="Логин"/>
             <TextBlock
-                Text="Пароль"/>
+                Name="NameInputAdvice"
+                Style="{StaticResource AdviceTextBlock}"/>
+            <TextBox
+                Name="EmailInput"
+                Uid="Электронная почта"/>
             <TextBox
                 Name="PasswordInput"
-                TextChanged="InputChanged"/>
+                Uid="Пароль"/>
+            <TextBox
+                Name="PasswordInputCheck"
+                Uid="Пароль повторно"/>
             <Button
                 Name="TrySignUpButton"
                 Content="Cоздать"
@@ -81,10 +102,8 @@
                 Margin="0,7.5,0,5"
                 IsEnabled="False"/>
             <TextBlock
-                TextAlignment="Center"
                 FontSize="20"
-                Margin="0,5"
-                TextWrapping="Wrap">
+                Margin="0,5">
                 <Run
                     Text="У меня уже есть аккаунт"
                     MouseDown="BackToSignInWindow"

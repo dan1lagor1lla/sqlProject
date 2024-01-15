@@ -53,20 +53,17 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="TextBoxBaseStyle"
-        TargetType="TextBox">
-        <Setter
-            Property="Template"
-            Value="{DynamicResource RoundedTextBoxTemplate}"/>
-        <Setter
-            Property="ContextMenu">
+           TargetType="TextBox">
+        <Setter Property="Template"
+                Value="{DynamicResource RoundedTextBoxTemplate}"/>
+        <Setter Property="ContextMenu">
             <Setter.Value>
-                <ContextMenu
-                    Visibility="Hidden"/>
+                <ContextMenu Visibility="Hidden"/>
             </Setter.Value>
         </Setter>
         <Setter
             Property="Background"
-            Value="{DynamicResource AdditionalBrush}"/>
+            Value="Transparent"/>
         <Setter
             Property="Foreground"
             Value="{DynamicResource TextBrush}"/>
@@ -79,42 +76,54 @@
         <Setter
             Property="CaretBrush"
             Value="{DynamicResource TextBrush}"/>
+    </Style>
+    <Style x:Key="TextBoxWithPlaceholderBaseStyle"
+           TargetType="TextBox"
+           BasedOn="{StaticResource TextBoxBaseStyle}">
+        <Setter
+            Property="Template"
+            Value="{DynamicResource RoundedTextBoxWithPlaceholderTemplate}"/>
         <Style.Triggers>
-            <EventTrigger
-                RoutedEvent="MouseEnter">
+            <EventTrigger RoutedEvent="GotKeyboardFocus">
                 <EventTrigger.Actions>
                     <BeginStoryboard>
                         <Storyboard
                             Timeline.DesiredFrameRate="60">
                             <ThicknessAnimation
                                 Storyboard.TargetProperty="BorderThickness"
-                                To="5"
-                                Duration="0:0:0.5"/>
-                            <ColorAnimation
-                                Storyboard.TargetProperty="Background.Color"
-                                To="Transparent"
-                                Duration="0:0:0.5"/>
+                                To="3"
+                                Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger
+                RoutedEvent="LostKeyboardFocus">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard
+                            Timeline.DesiredFrameRate="60">
+                            <ThicknessAnimation
+                                Storyboard.TargetProperty="BorderThickness"
+                                To="1"
+                                Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger.Actions>
             </EventTrigger>
         </Style.Triggers>
     </Style>
-    <Style
-        x:Key="HighlightRunStyle"
-        TargetType="Run">
+    <Style x:Key="HighlightRunStyle"
+           TargetType="Run">
         <Style.Setters>
-            <Setter
-                Property="TextDecorations"
-                Value="Underline"/>
-            <Setter
-                Property="Cursor"
-                Value="Hand"/>
+            <Setter Property="TextDecorations"
+                    Value="Underline"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
         </Style.Setters>
         <Style.Triggers>
-            <Trigger
-                Property="IsMouseOver"
-                Value="True">
+            <Trigger Property="IsMouseOver"
+                     Value="True">
                 <Setter
                     Property="Foreground"
                     Value="{DynamicResource AdditionalBrush}"/>

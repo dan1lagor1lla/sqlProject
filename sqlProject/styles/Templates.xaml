@@ -1,30 +1,74 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <ControlTemplate
-        x:Key="RoundedTextBoxTemplate"
-        TargetType="TextBox">
-        <Border
-            Name="border"
-            Width="{TemplateBinding Width}"
-            MaxWidth="{TemplateBinding MaxWidth}"
-            MinWidth="{TemplateBinding MaxWidth}"
-            Height="{TemplateBinding Height}"
-            MaxHeight="{TemplateBinding MaxHeight}"
-            MinHeight="{TemplateBinding MinHeight}"
-            Background="{TemplateBinding Background}"
-            BorderBrush="{TemplateBinding BorderBrush}"
-            BorderThickness="{TemplateBinding BorderThickness}"
-            Margin="{TemplateBinding Margin}"
-            Padding="{TemplateBinding Padding}"
-            Cursor="{TemplateBinding Cursor}"
-            CornerRadius="7.5">
-            <ScrollViewer
-                Name="PART_ContentHost"/>
-        </Border>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:sqlProject">
+    <local:PlaceholderPaddingConverter x:Key="PlaceholderPaddingConverter"/>
+    <ControlTemplate x:Key="RoundedTextBoxTemplate"
+                     TargetType="TextBox">
+            <Border
+                Name="border"
+                Width="{TemplateBinding Width}"
+                MaxWidth="{TemplateBinding MaxWidth}"
+                MinWidth="{TemplateBinding MaxWidth}"
+                Height="{TemplateBinding Height}"
+                MaxHeight="{TemplateBinding MaxHeight}"
+                MinHeight="{TemplateBinding MinHeight}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Margin="{TemplateBinding Margin}"
+                Padding="{TemplateBinding Padding}"
+                Cursor="{TemplateBinding Cursor}"
+                CornerRadius="7.5">
+                <ScrollViewer
+                    Name="PART_ContentHost"/>
+            </Border>
     </ControlTemplate>
-    <ControlTemplate
-        x:Key="RoundedButtonTemplate"
-        TargetType="Button">
+    <ControlTemplate x:Key="RoundedTextBoxWithPlaceholderTemplate"
+                     TargetType="TextBox">
+        <Grid>
+            <Border
+                Name="border"
+                Width="{TemplateBinding Width}"
+                MaxWidth="{TemplateBinding MaxWidth}"
+                MinWidth="{TemplateBinding MaxWidth}"
+                Height="{TemplateBinding Height}"
+                MaxHeight="{TemplateBinding MaxHeight}"
+                MinHeight="{TemplateBinding MinHeight}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Margin="{TemplateBinding Margin}"
+                Padding="{TemplateBinding Padding}"
+                Cursor="{TemplateBinding Cursor}"
+                CornerRadius="7.5">
+                <ScrollViewer
+                    Name="PART_ContentHost"/>
+            </Border>
+            <TextBlock
+                Name="placeholder"
+                Text="{TemplateBinding Property=Uid}"
+                Padding="{TemplateBinding Padding, Converter={StaticResource PlaceholderPaddingConverter}}"
+                FlowDirection="{TemplateBinding FlowDirection}"
+                Foreground="{TemplateBinding Foreground}"
+                FontSize="{TemplateBinding FontSize}"
+                Margin="{TemplateBinding Margin}"
+                VerticalAlignment="Center"
+                Panel.ZIndex="-1"
+                Opacity="0"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger
+                Property="Text"
+                Value="">
+                <Setter
+                    TargetName="placeholder"
+                    Property="Opacity"
+                    Value="0.35"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate x:Key="RoundedButtonTemplate"
+                     TargetType="Button">
         <Border
             Width="{TemplateBinding Width}"
             Height="{TemplateBinding Height}"
@@ -41,9 +85,9 @@
                 Content="{TemplateBinding Content}"/>
         </Border>
     </ControlTemplate>
-    <!--<ControlTemplate
-        x:Key="WindowTemplate"
-        TargetType="Window">
+        
+    <!--<ControlTemplate x:Key="WindowTemplate"
+                         TargetType="Window">
         <Border
             Width="{TemplateBinding Width}"
             Height="{TemplateBinding Height}"

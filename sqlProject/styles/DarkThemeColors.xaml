@@ -3,4 +3,5 @@
     <SolidColorBrush x:Key="MainBrush" Color="#212529"/>
     <SolidColorBrush x:Key="AdditionalBrush" Color="#343a40"/>
     <SolidColorBrush x:Key="TextBrush" Color="#6c757d"/>
+    <SolidColorBrush x:Key="AlarmBrush" Color="#a82525"/>
 </ResourceDictionary>

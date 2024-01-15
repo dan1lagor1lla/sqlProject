@@ -15,11 +15,10 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    /// <summary>
-    /// Interaction logic for SignUpWindow.xaml
-    /// </summary>
     public partial class SignUpWindow : Window
     {
+        private const int MinimalPasswordLength = 8;
+
         public SignUpWindow()
         {
             InitializeComponent();
@@ -29,7 +28,7 @@ namespace sqlProject
         {
             using (DataContext db = new())
             {
-                if (db.Users.FirstOrDefault(user => user.Name == NameInput.Text) is not null)
+                if (db.Users.SingleOrDefault(user => user.Name == NameInput.Text) is not null)
                 {
                     MessageBox.Show("Пользователь с этим именем уже существует!"); // to do : replace
                     return;
@@ -51,7 +50,20 @@ namespace sqlProject
 
         private void InputChanged(object sender, TextChangedEventArgs e)
         {
-            TrySignUpButton.IsEnabled = NameInput.Text.Length < 6 || PasswordInput.Text.Length < 6 ? false : true;
+            if (NameInput.Text.Length == 0)
+            {
+                NameInputAdvice.Text = $"Заполните поле";
+                NameInputAdvice.Visibility = Visibility.Visible;
+            }
+            else if (NameInput.Text.Length < MinimalPasswordLength)
+            {
+                NameInputAdvice.Text = $"Пароль должен быть не меньше {MinimalPasswordLength} символов";
+                NameInputAdvice.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                NameInputAdvice.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
