@@ -186,7 +186,11 @@ namespace sqlProject.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

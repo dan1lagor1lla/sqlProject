@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
+        Name="window"
         Title="SignUpWindow"
         Height="750"
         Width="750"
         MinWidth="550"
-        MinHeight="750"
+        MinHeight="950"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
@@ -33,9 +34,6 @@
             <Setter
                 Property="Margin"
                 Value="0,3.5"/>
-            <EventSetter
-                Event="TextChanged"
-                Handler="InputChanged"/>
         </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
@@ -67,6 +65,9 @@
                 Property="Visibility"
                 Value="Collapsed"/>
             <Setter
+                Property="TextWrapping"
+                Value="Wrap"/>
+            <Setter
                 Property="Foreground"
                 Value="{DynamicResource AlarmBrush}"/>
         </Style>
@@ -81,20 +82,33 @@
                 Text="Создание аккаунта"
                 Margin="0,0,0,25"/>
             <TextBox
-                Name="NameInput"
-                Uid="Логин"/>
+                Name="LoginInput"
+                Uid="Логин"
+                TextChanged="LoginInputChanged"/>
             <TextBlock
-                Name="NameInputAdvice"
+                Name="LoginInputAdvice"
                 Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
                 Name="EmailInput"
-                Uid="Электронная почта"/>
+                Uid="Электронная почта"
+                TextChanged="EmailInputChanged"/>
+            <TextBlock
+                Name="EmailInputAdvice"
+                Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
                 Name="PasswordInput"
-                Uid="Пароль"/>
+                Uid="Пароль"
+                TextChanged="PasswordInputChanged"/>
+            <TextBlock
+                Name="PasswordInputAdvice"
+                Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
                 Name="PasswordInputCheck"
-                Uid="Пароль повторно"/>
+                Uid="Пароль повторно"
+                TextChanged="PasswordInputCheckChanged"/>
+            <TextBlock
+                Name="PasswordInputCheckAdvice"
+                Style="{StaticResource AdviceTextBlock}"/>
             <Button
                 Name="TrySignUpButton"
                 Content="Cоздать"

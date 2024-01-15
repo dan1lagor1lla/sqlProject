@@ -21,18 +21,17 @@ namespace sqlProject
 
         private void TryLogIn(object sender, RoutedEventArgs e)
         {
-            //((App)Application.Current).ChangeTheme();
             using (DataContext db = new())
             {
-                User? user = db.Users.FirstOrDefault(user => user.Name == NameInput.Text);
+                User? user = db.Users.FirstOrDefault(user => user.Login == LoginInput.Text);
                 if (user is null)
                 {
-                    MessageBox.Show("Пользователя с данным именем не найдено!"); // to do : replace 
+                    new NotificationWindow("Пользователя с данным логином не найдено!").ShowDialog();
                     return;
                 }
-                if (user.Password != PasswordInput.Text)
+                if (user.Password != ((PasswordConverter)Resources["PasswordConverter"]).ConvertBack(PasswordInput.Text, null, PasswordInput, null))
                 {
-                    MessageBox.Show("Неверный пароль!"); // to do : replace 
+                    new NotificationWindow("Неверный пароль!").ShowDialog();
                     return;
                 }
                 new MainMenu(user).Show();
@@ -48,7 +47,7 @@ namespace sqlProject
 
         private void InputChanged(object sender, TextChangedEventArgs e)
         {
-            TryLogInButton.IsEnabled = NameInput.Text.Length < 6 || PasswordInput.Text.Length < 6 ? false : true;
+            TryLogInButton.IsEnabled = LoginInput.Text.Length < 6 || PasswordInput.Text.Length < 6 ? false : true;
         }
     }
 }

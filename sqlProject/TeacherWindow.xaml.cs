@@ -24,13 +24,10 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    /// <summary>
-    /// Interaction logic for TeacherWindow.xaml
-    /// </summary>
     public partial class TeacherWindow : Window
     {
         private DataContext databaseContext = new();
-        
+
         public TeacherWindow()
         {
             InitializeComponent();
@@ -41,12 +38,12 @@ namespace sqlProject
 
         private void AddTest(object sender, RoutedEventArgs e)
         {
-            databaseContext.Tests.Add(new Test("Новый тест") 
-            { 
-                Questions = [new Question("Вопрос") 
-                { 
-                    Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)] 
-                }] 
+            databaseContext.Tests.Add(new Test("Новый тест")
+            {
+                Questions = [new Question("Вопрос")
+                {
+                    Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)]
+                }]
             });
             databaseContext.SaveChanges();
         }
@@ -57,7 +54,7 @@ namespace sqlProject
                 databaseContext.Tests.Remove((Test)ListOfTests.SelectedItem);
             databaseContext.SaveChanges();
         }
-        
+
         private void TestSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ListOfTests.SelectedItems.Count != 1)
@@ -69,7 +66,7 @@ namespace sqlProject
             }
             Test selectedTest = (Test)ListOfTests.SelectedItem;
             databaseContext.Tests.Entry(selectedTest).Collection(test => test.Questions).Load();
-            
+
             ListOfQuestions.ContextMenu = (ContextMenu)Resources["ListOfQuestionsContextMenu"];
             TestSettingsViewer.DataContext = selectedTest;
             QuestionRandomnessToggleButton.IsEnabled = true;
@@ -83,9 +80,9 @@ namespace sqlProject
 
         private void AddQuestion(object sender, RoutedEventArgs e)
         {
-            ((Test)TestSettingsViewer.DataContext).Questions.Add(new Question("Вопрос") 
-            { 
-                Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)] 
+            ((Test)TestSettingsViewer.DataContext).Questions.Add(new Question("Вопрос")
+            {
+                Answers = [new Answer("Верный ответ", true), new Answer("Неверный ответ", false)]
             });
             databaseContext.SaveChanges();
         }
@@ -147,7 +144,7 @@ namespace sqlProject
             Question question = removingAnswer.OwnerQuestion;
             databaseContext.Answers.Remove(removingAnswer);
             databaseContext.SaveChanges();
-            
+
             if (question.Answers.Count(answer => answer.IsCorrect) == 0)
             {
                 question.Answers[0].IsCorrect = true;

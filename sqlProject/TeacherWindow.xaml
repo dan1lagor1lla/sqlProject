@@ -76,9 +76,9 @@
         <ContextMenu x:Key="HiddenContextMenu"
             Visibility="Hidden"/>
     </Window.Resources>
-    
+
     <Grid Margin="25">
-        
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="350" Width="0.5*"/>
             <ColumnDefinition Width="Auto"/>
@@ -118,12 +118,12 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        
+
         <GridSplitter
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             Width="15"/>
-        
+
         <DockPanel
             Grid.Column="2"
             Name="TestSettingsViewer">
@@ -207,7 +207,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </DockPanel>
-        
+
         <GridSplitter
             Grid.Row="1"
             Grid.ColumnSpan="3"
@@ -215,5 +215,5 @@
             HorizontalAlignment="Stretch"
             Height="15"/>
     </Grid>
-    
+
 </Window>
