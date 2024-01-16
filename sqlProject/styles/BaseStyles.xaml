@@ -77,73 +77,12 @@
             Property="CaretBrush"
             Value="{DynamicResource TextBrush}"/>
     </Style>
-    <Style x:Key="PasswordBoxBaseStyle"
-           TargetType="PasswordBox">
-        <Setter Property="Template"
-                Value="{DynamicResource RoundedTextBoxTemplate}"/>
-        <Setter Property="ContextMenu">
-            <Setter.Value>
-                <ContextMenu Visibility="Hidden"/>
-            </Setter.Value>
-        </Setter>
-        <Setter
-            Property="Background"
-            Value="Transparent"/>
-        <Setter
-            Property="Foreground"
-            Value="{DynamicResource TextBrush}"/>
-        <Setter
-            Property="BorderBrush"
-            Value="{DynamicResource AdditionalBrush}"/>
-        <Setter
-            Property="SelectionBrush"
-            Value="{DynamicResource TextBrush}"/>
-        <Setter
-            Property="CaretBrush"
-            Value="{DynamicResource TextBrush}"/>
-    </Style>
     <Style x:Key="TextBoxWithPlaceholderBaseStyle"
            TargetType="TextBox"
            BasedOn="{StaticResource TextBoxBaseStyle}">
         <Setter
             Property="Template"
             Value="{DynamicResource RoundedTextBoxWithPlaceholderTemplate}"/>
-        <Style.Triggers>
-            <EventTrigger RoutedEvent="GotKeyboardFocus">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard
-                            Timeline.DesiredFrameRate="60">
-                            <ThicknessAnimation
-                                Storyboard.TargetProperty="BorderThickness"
-                                To="3"
-                                Duration="0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-            <EventTrigger
-                RoutedEvent="LostKeyboardFocus">
-                <EventTrigger.Actions>
-                    <BeginStoryboard>
-                        <Storyboard
-                            Timeline.DesiredFrameRate="60">
-                            <ThicknessAnimation
-                                Storyboard.TargetProperty="BorderThickness"
-                                To="1"
-                                Duration="0:0:0.2"/>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger.Actions>
-            </EventTrigger>
-        </Style.Triggers>
-    </Style>
-    <Style x:Key="PasswordBoxWithPlaceholderBaseStyle"
-           TargetType="PasswordBox"
-           BasedOn="{StaticResource PasswordBoxBaseStyle}">
-        <Setter
-            Property="Template"
-            Value="{DynamicResource RoundedPasswordBoxWithPlaceholderTemplate}"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="GotKeyboardFocus">
                 <EventTrigger.Actions>
@@ -196,5 +135,26 @@
         <Setter
                 Property="Background"
                 Value="Transparent"/>
+    </Style>
+    <Style x:Key="BorderBaseStyle"
+           TargetType="Border">
+        <Setter
+            Property="BorderThickness"
+            Value="1"/>
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource AdditionalBrush}"/>
+        <Setter
+            Property="CornerRadius"
+            Value="10"/>
+    </Style>
+    <Style x:Key="ListBoxBaseStyle"
+           TargetType="ListBox">
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+        <Setter
+            Property="BorderThickness"
+            Value="0"/>
     </Style>
 </ResourceDictionary>

@@ -15,23 +15,15 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <Style
-            BasedOn="{StaticResource ButtonBaseStyle}"
-            TargetType="Button"/>
-        <Style
-            BasedOn="{StaticResource GridSplitterBaseStyle}"
-            TargetType="GridSplitter"/>
-        <Style
-            TargetType="ListBox">
+        <Style TargetType="ListBox">
             <Setter
                 Property="Background"
                 Value="Transparent"/>
             <Setter
-                Property="BorderBrush"
-                Value="{DynamicResource TextBrush}"/>
+                Property="BorderThickness"
+                Value="0"/>
         </Style>
-        <Style
-            TargetType="TextBox">
+        <Style TargetType="TextBox">
             <Setter
                 Property="Foreground"
                 Value="{DynamicResource TextBrush}"/>
@@ -54,6 +46,12 @@
                 Property="Padding"
                 Value="10, 15"/>
         </Style>
+        <Style TargetType="Button"
+               BasedOn="{StaticResource ButtonBaseStyle}"/>
+        <Style TargetType="Border"
+               BasedOn="{StaticResource BorderBaseStyle}"/>
+        <Style TargetType="GridSplitter"
+               BasedOn="{StaticResource GridSplitterBaseStyle}"/>
 
         <ContextMenu x:Key="ListOfTestsContextMenu"
                      Opened="ListOfTestsContextMenuOpened">
@@ -78,7 +76,6 @@
     </Window.Resources>
 
     <Grid Margin="25">
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition MinWidth="350" Width="0.5*"/>
             <ColumnDefinition Width="Auto"/>
@@ -90,124 +87,126 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListBox
-            Name="ListOfTests"
-            SelectionChanged="TestSelectionChanged"
-            ContextMenu="{StaticResource ListOfTestsContextMenu}"
-            ItemContainerStyle="{StaticResource TestItemStyle}"
-            SelectionMode="Extended"
-            VirtualizingStackPanel.IsVirtualizing="True"
-            VirtualizingStackPanel.ScrollUnit="Pixel">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBox
-                            Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                            ContextMenu="{StaticResource HiddenContextMenu}"
-                            KeyDown="UpdateSourceOfTextProperty"
-                            MaxLength="15"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="15"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
-
+        <Border>
+            <ListBox
+                Name="ListOfTests"
+                SelectionChanged="TestSelectionChanged"
+                ContextMenu="{StaticResource ListOfTestsContextMenu}"
+                ItemContainerStyle="{StaticResource TestItemStyle}"
+                SelectionMode="Extended"
+                VirtualizingStackPanel.IsVirtualizing="True"
+                VirtualizingStackPanel.ScrollUnit="Pixel">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBox
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                ContextMenu="{StaticResource HiddenContextMenu}"
+                                KeyDown="UpdateSourceOfTextProperty"
+                                MaxLength="15"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Padding="15"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+        </Border>
+    
         <GridSplitter
             Grid.Column="1"
             HorizontalAlignment="Stretch"
             Width="15"/>
-
-        <DockPanel
-            Grid.Column="2"
-            Name="TestSettingsViewer">
-            <ToggleButton
-                Name="QuestionRandomnessToggleButton"
-                DockPanel.Dock="Bottom"
-                FontSize="20"
-                IsEnabled="False"
-                Cursor="Hand"
-                IsChecked="{Binding Path=IsQuestionsOrderRandom}">
-                <ToggleButton.Content>
-                    <TextBlock
-                        Text="Смешать порядок вопросов"
-                        TextWrapping="Wrap"
-                        Padding="10 15"/>
-                </ToggleButton.Content>
-            </ToggleButton>
-            <ListBox
-                Name="ListOfQuestions"
-                ItemsSource="{Binding Path=Questions}"
-                SelectionMode="Extended"
-                HorizontalContentAlignment="Stretch"
-                VirtualizingStackPanel.ScrollUnit="Pixel">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Expander Expanded="ListOfAnswersExpanded">
-                            <Expander.Header>
-                                <DockPanel HorizontalAlignment="Stretch">
-                                    <TextBox
-                                        Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                        ContextMenu="{StaticResource HiddenContextMenu}"
-                                        KeyDown="UpdateSourceOfTextProperty"
-                                        BorderThickness="0"/>
-                                    <CheckBox
-                                        FontSize="45"
-                                        HorizontalContentAlignment="Stretch"
-                                        HorizontalAlignment="Stretch"
-                                        IsChecked="{Binding Path=IsUsing}"/>
-                                </DockPanel>
-                            </Expander.Header>
-                            <StackPanel>
-                                <ListBox
-                                    ItemsSource="{Binding Path=Answers}"
-                                    SelectionChanged="SelectionChanged"
-                                    BorderThickness="0"
-                                    Margin="50 0"
-                                    Background="Transparent">
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel
-                                                Orientation="Horizontal"
-                                                Margin="0, 2.5">
-                                                <TextBox
-                                                    Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                                    ContextMenu="{StaticResource HiddenContextMenu}"
-                                                    KeyDown="UpdateSourceOfTextProperty"/>
-                                                <CheckBox
-                                                    IsChecked="{Binding Path=IsCorrect}"/>
-                                                <Button
-                                                    Click="RemoveAnswer"
-                                                    BorderThickness="0"
-                                                    Background="Transparent">
-                                                    <Button.Content>
-                                                        <Image
-                                                            Source="images/binIcon.png"
-                                                            Width="25"
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Center"/>
-                                                    </Button.Content>
-                                                </Button>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                                <Button
-                                    Content="Добавить ответ"
-                                    Click="AddAnswer"/>
-                            </StackPanel>
-                        </Expander>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </DockPanel>
-
+        <Border
+            Grid.Column="2">
+            <DockPanel
+                Name="TestSettingsViewer">
+                <ToggleButton
+                    Name="QuestionRandomnessToggleButton"
+                    DockPanel.Dock="Bottom"
+                    FontSize="20"
+                    IsEnabled="False"
+                    Cursor="Hand"
+                    IsChecked="{Binding Path=IsQuestionsOrderRandom}">
+                    <ToggleButton.Content>
+                        <TextBlock
+                            Text="Смешать порядок вопросов"
+                            TextWrapping="Wrap"
+                            Padding="10 15"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <ListBox
+                    Name="ListOfQuestions"
+                    ItemsSource="{Binding Path=Questions}"
+                    SelectionMode="Extended"
+                    HorizontalContentAlignment="Stretch"
+                    VirtualizingStackPanel.ScrollUnit="Pixel">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Expander Expanded="ListOfAnswersExpanded">
+                                <Expander.Header>
+                                    <DockPanel HorizontalAlignment="Stretch">
+                                        <TextBox
+                                            Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                            ContextMenu="{StaticResource HiddenContextMenu}"
+                                            KeyDown="UpdateSourceOfTextProperty"
+                                            BorderThickness="0"/>
+                                        <CheckBox
+                                            FontSize="45"
+                                            HorizontalContentAlignment="Stretch"
+                                            HorizontalAlignment="Stretch"
+                                            IsChecked="{Binding Path=IsUsing}"/>
+                                    </DockPanel>
+                                </Expander.Header>
+                                <StackPanel>
+                                    <ListBox
+                                        ItemsSource="{Binding Path=Answers}"
+                                        SelectionChanged="SelectionChanged"
+                                        BorderThickness="0"
+                                        Margin="50 0"
+                                        Background="Transparent">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel
+                                                    Orientation="Horizontal"
+                                                    Margin="0, 2.5">
+                                                    <TextBox
+                                                        Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                                        ContextMenu="{StaticResource HiddenContextMenu}"
+                                                        KeyDown="UpdateSourceOfTextProperty"/>
+                                                    <CheckBox
+                                                        IsChecked="{Binding Path=IsCorrect}"/>
+                                                    <Button
+                                                        Click="RemoveAnswer"
+                                                        BorderThickness="0"
+                                                        Background="Transparent">
+                                                        <Button.Content>
+                                                            <Image
+                                                                Source="images/binIcon.png"
+                                                                Width="25"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"/>
+                                                        </Button.Content>
+                                                    </Button>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                    <Button
+                                        Content="Добавить ответ"
+                                        Click="AddAnswer"/>
+                                </StackPanel>
+                            </Expander>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
         <GridSplitter
             Grid.Row="1"
             Grid.ColumnSpan="3"

@@ -29,12 +29,20 @@ namespace sqlProject
                     new NotificationWindow("Пользователя с данным логином не найдено!").ShowDialog();
                     return;
                 }
-                if (user.Password != ((PasswordConverter)Resources["PasswordConverter"]).ConvertBack(PasswordInput.Text, null, PasswordInput, null))
+                if (user.Password != PasswordInput.Text)
                 {
                     new NotificationWindow("Неверный пароль!").ShowDialog();
                     return;
                 }
-                new MainMenu(user).Show();
+                switch (user.TypeID)
+                {
+                    case 1:
+                        new TeacherWindow().Show();
+                        break;
+                    case 2:
+                        new MainMenu(user).Show();
+                        break;
+                }
                 Close();
             }
         }
@@ -43,11 +51,6 @@ namespace sqlProject
         {
             new SignUpWindow().Show();
             Close();
-        }
-
-        private void InputChanged(object sender, TextChangedEventArgs e)
-        {
-            TryLogInButton.IsEnabled = LoginInput.Text.Length < 6 || PasswordInput.Text.Length < 6 ? false : true;
         }
     }
 }

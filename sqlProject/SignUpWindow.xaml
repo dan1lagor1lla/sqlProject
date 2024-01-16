@@ -114,6 +114,7 @@
                 Content="Cоздать"
                 Click="TrySignUp"
                 Margin="0,7.5,0,5"
+                IsDefault="True"
                 IsEnabled="False"/>
             <TextBlock
                 FontSize="20"

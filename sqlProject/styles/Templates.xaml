@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:sqlProject">
     <local:PlaceholderPaddingConverter x:Key="PlaceholderPaddingConverter"/>
+    
     <ControlTemplate x:Key="RoundedTextBoxTemplate"
                      TargetType="TextBox">
             <Border
@@ -18,9 +19,13 @@
                 Margin="{TemplateBinding Margin}"
                 Padding="{TemplateBinding Padding}"
                 Cursor="{TemplateBinding Cursor}"
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
                 CornerRadius="7.5">
                 <ScrollViewer
-                    Name="PART_ContentHost"/>
+                    Name="PART_ContentHost"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
     </ControlTemplate>
     <ControlTemplate x:Key="RoundedTextBoxWithPlaceholderTemplate"
@@ -40,12 +45,15 @@
                 Margin="{TemplateBinding Margin}"
                 Padding="{TemplateBinding Padding}"
                 Cursor="{TemplateBinding Cursor}"
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
                 CornerRadius="7.5">
                 <ScrollViewer
                     Name="PART_ContentHost"/>
             </Border>
             <TextBlock
                 Name="placeholder"
+                TextWrapping="{TemplateBinding TextWrapping}"
                 Text="{TemplateBinding Property=Uid}"
                 Padding="{TemplateBinding Padding, Converter={StaticResource PlaceholderPaddingConverter}}"
                 FlowDirection="{TemplateBinding FlowDirection}"
@@ -67,50 +75,6 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    <ControlTemplate x:Key="RoundedPasswordBoxWithPlaceholderTemplate"
-                     TargetType="PasswordBox">
-        <Grid>
-            <Border
-                Name="border"
-                Width="{TemplateBinding Width}"
-                MaxWidth="{TemplateBinding MaxWidth}"
-                MinWidth="{TemplateBinding MaxWidth}"
-                Height="{TemplateBinding Height}"
-                MaxHeight="{TemplateBinding MaxHeight}"
-                MinHeight="{TemplateBinding MinHeight}"
-                Background="{TemplateBinding Background}"
-                BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}"
-                Margin="{TemplateBinding Margin}"
-                Padding="{TemplateBinding Padding}"
-                Cursor="{TemplateBinding Cursor}"
-                CornerRadius="7.5">
-                <ScrollViewer
-                    Name="PART_ContentHost"/>
-            </Border>
-            <TextBlock
-                Name="placeholder"
-                Text="{TemplateBinding Property=Uid}"
-                Padding="{TemplateBinding Padding, Converter={StaticResource PlaceholderPaddingConverter}}"
-                FlowDirection="{TemplateBinding FlowDirection}"
-                Foreground="{TemplateBinding Foreground}"
-                FontSize="{TemplateBinding FontSize}"
-                Margin="{TemplateBinding Margin}"
-                VerticalAlignment="Center"
-                Panel.ZIndex="-1"
-                Opacity="0"/>
-        </Grid>
-        <!--<ControlTemplate.Triggers>
-            <Trigger
-                Property=""
-                Value="">
-                <Setter
-                    TargetName="placeholder"
-                    Property="Opacity"
-                    Value="0.35"/>
-            </Trigger>
-        </ControlTemplate.Triggers>-->
-    </ControlTemplate>
     <ControlTemplate x:Key="RoundedButtonTemplate"
                      TargetType="Button">
         <Border
@@ -123,10 +87,13 @@
             MaxWidth="{TemplateBinding MaxWidth}"
             Cursor="{TemplateBinding Cursor}"
             Padding="{TemplateBinding Padding}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
             CornerRadius="10">
             <ContentPresenter
+                Content="{TemplateBinding Content}"
                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                Content="{TemplateBinding Content}"/>
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
     </ControlTemplate>
         

@@ -33,9 +33,6 @@
             <Setter
                 Property="Padding"
                 Value="7.5,10"/>
-            <EventSetter
-                Event="TextChanged"
-                Handler="InputChanged"/>
         </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
@@ -52,7 +49,6 @@
                 Property="Padding"
                 Value="0,15"/>
         </Style>
-        <local:PasswordConverter x:Key="PasswordConverter"/>
     </Window.Resources>
     <Grid
         HorizontalAlignment="Center"
@@ -68,16 +64,14 @@
                 Uid="Логин"/>
             <TextBox
                 Name="PasswordInput"
-                Uid="Пароль"
-                Text="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Text, Converter={StaticResource PasswordConverter}}"/>
-            <!--<PasswordBox
-                Style="{DynamicResource PasswordBoxWithPlaceholderBaseStyle}"/>-->
+                Uid="Пароль"/>
             <Button
                 Name="TryLogInButton"
+                IsDefault="True"
                 Content="Войти"
                 Click="TryLogIn"
                 Margin="0, 5"
-                IsEnabled="False">
+                IsEnabled="True">
             </Button>
             <TextBlock
                 FontSize="20"
