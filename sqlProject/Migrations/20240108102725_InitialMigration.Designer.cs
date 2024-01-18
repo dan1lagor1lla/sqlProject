@@ -10,7 +10,7 @@ using sqlProject;
 
 namespace sqlProject.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20240108102725_InitialMigration")]
     partial class InitialMigration
     {

@@ -16,30 +16,25 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    /// <summary>
-    /// Interaction logic for MainMenu.xaml
-    /// </summary>
+    // to do : search
+    //       : testing
+    //       : password/email change
+    //       : some statistic 
     public partial class MainMenu : Window
     {
-        private DataContext databaseContext = new();
-        private User student;
-
         internal MainMenu(User student)
         {
             InitializeComponent();
 
-            this.student = student;
-            databaseContext.Users.Update(student);
-            databaseContext.Logging.Add(new Logging(student, databaseContext.LoggingTypes.Single(logType => logType.ID == 1)));
-            databaseContext.SaveChanges();
-
-            databaseContext.Tests.Load();
-            ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
-        }
-
-        private void ChangeTheme(object sender, RoutedEventArgs e)
-        {
-
+            using (DatabaseContext db = new())
+            {
+                db.Users.Update(student);
+                db.Logging.Add(new Logging(student, db.LoggingTypes.Single(logType => logType.ID == 1)));
+                db.SaveChanges();
+                db.Tests.Load();
+                ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
+            }
+            DataContext = student;
         }
     }
 }

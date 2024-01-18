@@ -18,15 +18,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using sqlProject.model;
 
-// to do : tool tip on unenabled button
-//         some requierments for input & advices what matter with incorrect inputs
+// to do : teacher can see all statistic
+//       : design
 //         all answers cannot be correct? or can be
 
 namespace sqlProject
 {
     public partial class TeacherWindow : Window
     {
-        private DataContext databaseContext = new();
+        private DatabaseContext databaseContext = new();
 
         public TeacherWindow()
         {

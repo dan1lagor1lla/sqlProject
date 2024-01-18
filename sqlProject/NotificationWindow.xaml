@@ -30,15 +30,14 @@
             TextWrapping="Wrap"
             VerticalAlignment="Center"/>
         <Button
-            BorderThickness="0"
-            FontSize="15"
             Content="Окей"
+            Click="CloseWindow"
             Grid.Row="1"
+            IsDefault="True"
+            FontSize="15"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
-            Width="90"
             Padding="0,10"
-            Cursor="Hand"
-            Click="CloseWindow"/>
+            Width="90"/>
     </Grid>
 </Window>

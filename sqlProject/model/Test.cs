@@ -48,7 +48,7 @@ namespace sqlProject.model
 
         private void UpdateInDatabase()
         {
-            using (DataContext db = new())
+            using (DatabaseContext db = new())
             {
                 db.Tests.Update(this);
                 db.SaveChanges();

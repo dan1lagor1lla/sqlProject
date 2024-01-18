@@ -30,7 +30,7 @@ namespace sqlProject
 
         private void TrySignUp(object sender, RoutedEventArgs e)
         {
-            using (DataContext db = new())
+            using (DatabaseContext db = new())
             {
                 if (db.Users.SingleOrDefault(user => user.Login == LoginInput.Text) is not null)
                 {

@@ -40,12 +40,6 @@
                 Property="FontSize"
                 Value="20"/>
             <Setter
-                Property="BorderThickness"
-                Value="0"/>
-            <Setter
-                Property="Cursor"
-                Value="Hand"/>
-            <Setter
                 Property="Padding"
                 Value="0,15"/>
         </Style>
@@ -67,11 +61,10 @@
                 Uid="Пароль"/>
             <Button
                 Name="TryLogInButton"
-                IsDefault="True"
                 Content="Войти"
                 Click="TryLogIn"
-                Margin="0, 5"
-                IsEnabled="True">
+                IsDefault="True"
+                Margin="0, 5">
             </Button>
             <TextBlock
                 FontSize="20"

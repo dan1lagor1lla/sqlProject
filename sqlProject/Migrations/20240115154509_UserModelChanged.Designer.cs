@@ -10,7 +10,7 @@ using sqlProject;
 
 namespace sqlProject.Migrations
 {
-    [DbContext(typeof(DataContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20240115154509_UserModelChanged")]
     partial class UserModelChanged
     {

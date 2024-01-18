@@ -18,15 +18,33 @@
             <Setter
                 Property="Foreground"
                 Value="{DynamicResource TextBrush}"/>
+            <Setter
+                Property="Padding"
+                Value="10, 15"/>
+        </Style>
+        <Style TargetType="ListBox"
+               BasedOn="{StaticResource ListBoxBaseStyle}">
+            <Setter
+                Property="Margin"
+                Value="15"/>
+        </Style>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource TextBoxBaseStyle}">
+            <Setter
+                Property="VerticalAlignment"
+                Value="Center"/>
+            <Setter
+                Property="Padding"
+                Value="5, 7.5"/>
+        </Style>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockBaseStyle}">
+            <Setter
+                Property="TextWrapping"
+                Value="Wrap"/>
         </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}"/>
-        <Style TargetType="TextBox"
-               BasedOn="{StaticResource TextBoxBaseStyle}"/>
-        <Style TargetType="Border"
-               BasedOn="{StaticResource BorderBaseStyle}"/>
-        <Style TargetType="ListBox"
-               BasedOn="{StaticResource ListBoxBaseStyle}"/>
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
     </Window.Resources>
@@ -34,19 +52,28 @@
     <Grid
         Margin="25">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="500" Width="1.5*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition MinWidth="300" Width="*"/>
+            <ColumnDefinition
+                MinWidth="500"
+                Width="1.5*"/>
+            <ColumnDefinition
+                Width="Auto"/>
+            <ColumnDefinition
+                MinWidth="300"
+                Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="100" Height="0.2*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition
+                Height="Auto"/>
+            <RowDefinition
+                Height="*"/>
         </Grid.RowDefinitions>
         
         <TextBox
-            Margin="0,0,0,10"/>
+            Margin="0,0,0,10"
+            VerticalAlignment="Stretch"/>
         <Border
-             Grid.Row="1">
+            Style="{DynamicResource BorderBaseStyle}"
+            Grid.Row="1">
             <ListBox
                 Name="ListOfTests"/>
         </Border>
@@ -58,17 +85,17 @@
             HorizontalAlignment="Stretch"/>
 
         <Border
+            Style="{DynamicResource BorderBaseStyle}"
             Grid.Column="2"
             Grid.RowSpan="2">
             <DockPanel>
-                <!--<PasswordBox Margin="10" DockPanel.Dock="Top" Grid.Column="1"/>
-                <Button Content="Sign in" Margin="10 5" Background="Transparent" DockPanel.Dock="Top" Grid.Row="1" Grid.ColumnSpan="2" FontSize="15" Padding="10"/>
-                <TextBlock DockPanel.Dock="Top" Margin="7.5 10" TextWrapping="Wrap" Grid.Row="2" FontSize="20" TextAlignment="Center" Grid.ColumnSpan="2">
-                    <Run Text="Новенький?"/>
-                    <Run Text="Создать аккаунт" Cursor="Hand" TextDecorations="Underline" FontWeight="Bold"/>
-                </TextBlock>-->
+                <TextBlock
+                    Text="{Binding StringFormat=Добро пожаловать\,\ {0}, Path=Login}"
+                    Padding="5, 15"
+                    DockPanel.Dock="Top"
+                    FontSize="30"
+                    TextAlignment="Center"/>
             </DockPanel>
-
         </Border>
     </Grid>
 </Window>

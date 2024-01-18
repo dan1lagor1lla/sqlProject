@@ -15,14 +15,6 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <Style TargetType="ListBox">
-            <Setter
-                Property="Background"
-                Value="Transparent"/>
-            <Setter
-                Property="BorderThickness"
-                Value="0"/>
-        </Style>
         <Style TargetType="TextBox">
             <Setter
                 Property="Foreground"
@@ -46,10 +38,10 @@
                 Property="Padding"
                 Value="10, 15"/>
         </Style>
+        <Style TargetType="ListBox"
+               BasedOn="{StaticResource ListBoxBaseStyle}"/>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}"/>
-        <Style TargetType="Border"
-               BasedOn="{StaticResource BorderBaseStyle}"/>
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
 
@@ -75,19 +67,28 @@
             Visibility="Hidden"/>
     </Window.Resources>
 
-    <Grid Margin="25">
+    <Grid
+        Margin="25">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="350" Width="0.5*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition MinWidth="250" Width="*"/>
+            <ColumnDefinition
+                MinWidth="350"
+                Width="0.5*"/>
+            <ColumnDefinition
+                Width="Auto"/>
+            <ColumnDefinition
+                MinWidth="250"
+                Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MinHeight="300"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition
+                MinHeight="300"/>
+            <RowDefinition
+                Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border>
+        <Border
+            Style="{DynamicResource BorderBaseStyle}">
             <ListBox
                 Name="ListOfTests"
                 SelectionChanged="TestSelectionChanged"
@@ -103,9 +104,9 @@
                                 Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                 ContextMenu="{StaticResource HiddenContextMenu}"
                                 KeyDown="UpdateSourceOfTextProperty"
-                                MaxLength="15"
                                 Background="Transparent"
                                 BorderThickness="0"
+                                MaxLength="15"
                                 Padding="15"/>
                         </StackPanel>
                     </DataTemplate>
@@ -123,6 +124,7 @@
             HorizontalAlignment="Stretch"
             Width="15"/>
         <Border
+            Style="{DynamicResource BorderBaseStyle}"
             Grid.Column="2">
             <DockPanel
                 Name="TestSettingsViewer">
@@ -148,14 +150,15 @@
                     VirtualizingStackPanel.ScrollUnit="Pixel">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <Expander Expanded="ListOfAnswersExpanded">
+                            <Expander
+                                Expanded="ListOfAnswersExpanded">
                                 <Expander.Header>
-                                    <DockPanel HorizontalAlignment="Stretch">
+                                    <DockPanel
+                                        HorizontalAlignment="Stretch">
                                         <TextBox
                                             Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                             ContextMenu="{StaticResource HiddenContextMenu}"
-                                            KeyDown="UpdateSourceOfTextProperty"
-                                            BorderThickness="0"/>
+                                            KeyDown="UpdateSourceOfTextProperty"/>
                                         <CheckBox
                                             FontSize="45"
                                             HorizontalContentAlignment="Stretch"
@@ -167,9 +170,7 @@
                                     <ListBox
                                         ItemsSource="{Binding Path=Answers}"
                                         SelectionChanged="SelectionChanged"
-                                        BorderThickness="0"
-                                        Margin="50 0"
-                                        Background="Transparent">
+                                        Margin="50 0">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <StackPanel
@@ -183,7 +184,6 @@
                                                         IsChecked="{Binding Path=IsCorrect}"/>
                                                     <Button
                                                         Click="RemoveAnswer"
-                                                        BorderThickness="0"
                                                         Background="Transparent">
                                                         <Button.Content>
                                                             <Image
@@ -211,8 +211,6 @@
             Grid.Row="1"
             Grid.ColumnSpan="3"
             VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
             Height="15"/>
     </Grid>
-
 </Window>

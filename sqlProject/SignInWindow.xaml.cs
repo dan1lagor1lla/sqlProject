@@ -12,16 +12,15 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    // to do : open/close password
+    //       : block interface after 3 fails to log in
     public partial class SignInWindow : Window
     {
         public SignInWindow() => InitializeComponent();
 
         private void TryLogIn(object sender, RoutedEventArgs e)
         {
-            using (DataContext db = new())
+            using (DatabaseContext db = new())
             {
                 User? user = db.Users.FirstOrDefault(user => user.Login == LoginInput.Text);
                 if (user is null)
