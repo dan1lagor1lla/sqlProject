@@ -23,8 +23,7 @@ namespace sqlProject.model
             {
                 if (value == "")
                 {
-                    MessageBox.Show("Ошибка"); //
-                                               // : replace
+                    new NotificationWindow("Ошибка").ShowDialog();
                     return;
                 }
                 content = value;
@@ -39,7 +38,7 @@ namespace sqlProject.model
             {
                 if (value == false && OwnerTest.Questions.Count(question => question.IsUsing) == 1)
                 {
-                    MessageBox.Show("Тест должен содержать хотя бы один вопрос!"); // to do : replace
+                    new NotificationWindow("Тест должен содержать хотя бы один вопрос!").ShowDialog();
                     return;
                 }
                 isUsing = value;

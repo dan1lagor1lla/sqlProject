@@ -7,7 +7,7 @@ namespace sqlProject
     {
         public DbSet<Test> Tests { get; set; } = null!;
         public DbSet<Question> Questions { get; set; } = null!;
-        public DbSet<Answer> Answers { get; set; } = null!;
+        public DbSet<Answer> Answers { get; set; } =null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<UserType> UserTypes { get; private set; } = null!;
         public DbSet<Logging> Logging { get; set; } = null!;

@@ -15,12 +15,8 @@ using System.Windows.Shapes;
 
 namespace sqlProject
 {
-    /// <summary>
-    /// Interaction logic for NotificationWindow.xaml
-    /// </summary>
     public partial class NotificationWindow : Window
     {
-
         public NotificationWindow(string message, string title) : this(message) => Title = title;
 
         public NotificationWindow(string message)

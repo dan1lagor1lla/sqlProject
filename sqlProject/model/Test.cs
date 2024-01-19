@@ -20,7 +20,7 @@ namespace sqlProject.model
             {
                 if (value == "")
                 {
-                    MessageBox.Show("Ошибка!"); // to do : replace
+                    new NotificationWindow("Ошибка!").ShowDialog();
                     return;
                 }
                 name = value;

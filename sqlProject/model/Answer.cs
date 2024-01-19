@@ -22,7 +22,7 @@ namespace sqlProject.model
             {
                 if (value == "")
                 {
-                    MessageBox.Show("Ошибка"); // to do : replace 
+                    new NotificationWindow("Ошибка").ShowDialog();
                     return;
                 }
                 content = value;
@@ -37,7 +37,7 @@ namespace sqlProject.model
             {
                 if (value == false && OwnerQuestion.Answers.Count(answer => answer.IsCorrect) == 1)
                 {
-                    MessageBox.Show("Вопрос должен иметь хотя бы один правильный ответ!"); // to do : replace
+                    new NotificationWindow("Вопрос должен иметь хотя бы один правильный ответ!").ShowDialog();
                     return;
                 }
                 isCorrect = value;

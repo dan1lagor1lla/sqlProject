@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="bin.png" />
+    <None Remove="images\check.png" />
+    <None Remove="images\uncheck.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +26,12 @@
 
   <ItemGroup>
     <Resource Include="images\binIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\uncheck.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

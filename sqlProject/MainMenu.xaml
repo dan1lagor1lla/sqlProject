@@ -29,7 +29,7 @@
                 Value="15"/>
         </Style>
         <Style TargetType="TextBox"
-               BasedOn="{StaticResource TextBoxBaseStyle}">
+               BasedOn="{StaticResource TextBoxWithPlaceholderBaseStyle}">
             <Setter
                 Property="VerticalAlignment"
                 Value="Center"/>
@@ -69,6 +69,9 @@
         </Grid.RowDefinitions>
         
         <TextBox
+            Uid="Поиск"
+            Padding="10, 12.5"
+            FontSize="35"
             Margin="0,0,0,10"
             VerticalAlignment="Stretch"/>
         <Border
@@ -91,9 +94,9 @@
             <DockPanel>
                 <TextBlock
                     Text="{Binding StringFormat=Добро пожаловать\,\ {0}, Path=Login}"
-                    Padding="5, 15"
+                    Padding="25, 20"
                     DockPanel.Dock="Top"
-                    FontSize="30"
+                    FontSize="25"
                     TextAlignment="Center"/>
             </DockPanel>
         </Border>

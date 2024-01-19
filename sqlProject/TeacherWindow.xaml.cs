@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -31,7 +32,6 @@ namespace sqlProject
         public TeacherWindow()
         {
             InitializeComponent();
-
             databaseContext.Tests.Load();
             ListOfTests.ItemsSource = databaseContext.Tests.Local.ToObservableCollection();
         }
@@ -92,7 +92,7 @@ namespace sqlProject
             Test test = (Test)TestSettingsViewer.DataContext;
             if (test.Questions.Count - ListOfQuestions.SelectedItems.Count == 0)
             {
-                MessageBox.Show("Тест должен иметь хотя бы один вопрос!"); // to do : replace
+                new NotificationWindow("Тест должен иметь хотя бы один вопрос!").Show();
                 return;
             }
             while (ListOfQuestions.SelectedItem is not null)
@@ -138,7 +138,7 @@ namespace sqlProject
             Answer removingAnswer = (Answer)((FrameworkElement)sender).DataContext;
             if (removingAnswer.OwnerQuestion.Answers.Count == 2)
             {
-                MessageBox.Show("Вопрос должен иметь хотя бы два ответа!"); // to do : replace 
+                new NotificationWindow("Вопрос должен иметь хотя бы два ответа!").Show();
                 return;
             }
             Question question = removingAnswer.OwnerQuestion;
@@ -155,6 +155,16 @@ namespace sqlProject
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ((ListBox)sender).SelectedItem = null;
+        }
+
+        private void ChangeIcon(object sender, RoutedEventArgs e)
+        {
+            ToggleButton toggle = (ToggleButton)sender;
+            if (toggle.IsChecked == true)
+                ((Image)toggle.Content).Source = new BitmapImage(new Uri("images/check.png", UriKind.Relative));
+            else
+                ((Image)toggle.Content).Source = new BitmapImage(new Uri("images/uncheck.png", UriKind.Relative));
+
         }
     }
 }

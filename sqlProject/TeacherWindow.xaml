@@ -158,7 +158,9 @@
                                         <TextBox
                                             Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                             ContextMenu="{StaticResource HiddenContextMenu}"
-                                            KeyDown="UpdateSourceOfTextProperty"/>
+                                            KeyDown="UpdateSourceOfTextProperty"
+                                            BorderThickness="0"
+                                            Background="Transparent"/>
                                         <CheckBox
                                             FontSize="45"
                                             HorizontalContentAlignment="Stretch"
@@ -179,16 +181,32 @@
                                                     <TextBox
                                                         Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                                         ContextMenu="{StaticResource HiddenContextMenu}"
-                                                        KeyDown="UpdateSourceOfTextProperty"/>
-                                                    <CheckBox
-                                                        IsChecked="{Binding Path=IsCorrect}"/>
+                                                        KeyDown="UpdateSourceOfTextProperty"
+                                                        Background="Transparent"
+                                                        BorderThickness="0"/>
+                                                    <ToggleButton
+                                                        Name="toggle"
+                                                        IsChecked="{Binding Path=IsCorrect}"
+                                                        BorderThickness="0"
+                                                        Background="Transparent"
+                                                        Cursor="Hand"
+                                                        Checked="ChangeIcon"
+                                                        Unchecked="ChangeIcon"
+                                                        Margin="7.5,0">
+                                                        <ToggleButton.Content>
+                                                            <Image
+                                                                Name="img"
+                                                                Source="images\uncheck.png"
+                                                                Width="30"/>
+                                                        </ToggleButton.Content>
+                                                    </ToggleButton>
                                                     <Button
                                                         Click="RemoveAnswer"
                                                         Background="Transparent">
                                                         <Button.Content>
                                                             <Image
                                                                 Source="images/binIcon.png"
-                                                                Width="25"
+                                                                Width="30"
                                                                 HorizontalAlignment="Center"
                                                                 VerticalAlignment="Center"/>
                                                         </Button.Content>
@@ -199,7 +217,11 @@
                                     </ListBox>
                                     <Button
                                         Content="Добавить ответ"
-                                        Click="AddAnswer"/>
+                                        Click="AddAnswer"
+                                        FontSize="20"
+                                        Margin="30,5,0,5"
+                                        Padding="20,12.5"
+                                        HorizontalAlignment="Left"/>
                                 </StackPanel>
                             </Expander>
                         </DataTemplate>
@@ -210,7 +232,7 @@
         <GridSplitter
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
             Height="15"/>
     </Grid>
 </Window>
