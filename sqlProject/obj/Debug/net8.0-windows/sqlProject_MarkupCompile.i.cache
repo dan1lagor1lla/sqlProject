@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\App.xaml
-9393923181
+101466710833
 
-36-1774346787
+37-1443497100
 238133008206
-MainMenu.xaml;NotificationWindow.xaml;SignInWindow.xaml;SignUpWindow.xaml;styles\BaseStyles.xaml;styles\DarkThemeColors.xaml;styles\LightThemeColors.xaml;styles\Templates.xaml;TeacherWindow.xaml;
+MainMenu.xaml;NotificationWindow.xaml;SignInWindow.xaml;SignUpWindow.xaml;styles\BaseStyles.xaml;styles\DarkTheme.xaml;styles\LightTheme.xaml;styles\Templates.xaml;TeacherWindow.xaml;TestWindow.xaml;
 
-False
+True
 

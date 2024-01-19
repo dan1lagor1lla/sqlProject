@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="MainBrush" Color="#212529"/>
+    <SolidColorBrush x:Key="AdditionalBrush" Color="#343a40"/>
+    <SolidColorBrush x:Key="TextBrush" Color="#6c757d"/>
+    <SolidColorBrush x:Key="AlarmBrush" Color="#a82525"/>
+    <Image x:Key="ThemeIcon"
+           Height="25"
+           Source="..\images\sun-icon.png">
+    </Image>
+</ResourceDictionary>

@@ -19,6 +19,9 @@
     <Compile Update="TeacherWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="TestWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainMenu.xaml">
@@ -36,16 +39,19 @@
     <Page Update="styles\BaseStyles.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\DarkThemeColors.xaml">
+    <Page Update="styles\DarkTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="styles\LightThemeColors.xaml">
+    <Page Update="styles\LightTheme.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\Templates.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="TeacherWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="TestWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

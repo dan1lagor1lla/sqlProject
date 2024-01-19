@@ -178,5 +178,7 @@ namespace sqlProject
                     return true;
             return false;
         }
+
+        private void ChangeTheme(object sender, RoutedEventArgs e) => ((App)App.Current).ChangeTheme();
     }
 }

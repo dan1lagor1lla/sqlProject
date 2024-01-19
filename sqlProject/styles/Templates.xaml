@@ -2,7 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:sqlProject">
     <local:PlaceholderPaddingConverter x:Key="PlaceholderPaddingConverter"/>
-    
     <ControlTemplate x:Key="RoundedTextBoxTemplate"
                      TargetType="TextBox">
             <Border
@@ -49,17 +48,20 @@
                 VerticalAlignment="{TemplateBinding VerticalAlignment}"
                 CornerRadius="7.5">
                 <ScrollViewer
-                    Name="PART_ContentHost"/>
+                    Name="PART_ContentHost"
+                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
             </Border>
             <TextBlock
                 Name="placeholder"
-                TextWrapping="{TemplateBinding TextWrapping}"
                 Text="{TemplateBinding Property=Uid}"
                 Padding="{TemplateBinding Padding, Converter={StaticResource PlaceholderPaddingConverter}}"
                 FlowDirection="{TemplateBinding FlowDirection}"
+                TextWrapping="{TemplateBinding TextWrapping}"
                 Foreground="{TemplateBinding Foreground}"
                 FontSize="{TemplateBinding FontSize}"
                 Margin="{TemplateBinding Margin}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                 VerticalAlignment="Center"
                 Panel.ZIndex="-1"
                 Opacity="0"/>
@@ -96,7 +98,6 @@
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
     </ControlTemplate>
-        
     <!--<ControlTemplate x:Key="WindowTemplate"
                          TargetType="Window">
         <Border

@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
         Name="window"
-        Title="SignUpWindow"
         Height="750"
         Width="750"
         MinWidth="550"
-        MinHeight="950"
+        MinHeight="800"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
@@ -69,7 +68,7 @@
     <Grid
         HorizontalAlignment="Stretch"
         VerticalAlignment="Center"
-        Margin="100">
+        Margin="100,25">
         <StackPanel
             MaxWidth="500">
             <TextBlock
@@ -118,6 +117,14 @@
                     MouseDown="BackToSignInWindow"
                     Style="{DynamicResource HighlightRunStyle}"/>
             </TextBlock>
+            <Button
+                Template="{DynamicResource RoundedButtonTemplate}"
+                Content="{DynamicResource ThemeIcon}"
+                Click="ChangeTheme"
+                Background="Transparent"
+                BorderThickness="0"
+                Cursor="Hand"
+                HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>

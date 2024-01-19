@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        Title="MainMenu"
         SizeToContent="WidthAndHeight"
         FontSize="50"
+        MinWidth="850"
+        MinHeight="500"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
@@ -48,12 +49,11 @@
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
     </Window.Resources>
-    
     <Grid
         Margin="25">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
-                MinWidth="500"
+                MinWidth="450"
                 Width="1.5*"/>
             <ColumnDefinition
                 Width="Auto"/>
@@ -73,12 +73,14 @@
             Padding="10, 12.5"
             FontSize="35"
             Margin="0,0,0,10"
-            VerticalAlignment="Stretch"/>
+            VerticalAlignment="Stretch"
+            TextChanged="SearchFilterChanged"/>
         <Border
             Style="{DynamicResource BorderBaseStyle}"
             Grid.Row="1">
             <ListBox
-                Name="ListOfTests"/>
+                Name="ListOfTests"
+                SelectionChanged="DoTest"/>
         </Border>
 
         <GridSplitter

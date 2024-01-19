@@ -28,8 +28,6 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\sqlProject.runtimeconfig.json
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\sqlProject.dll
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\sqlProject.pdb
-C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\DarkThemeColors.baml
-C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\LightThemeColors.baml
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\App.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject_MarkupCompile.cache
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject_MarkupCompile.lref
@@ -193,3 +191,7 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\NotificationWindow.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\NotificationWindow.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\DarkTheme.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\LightTheme.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TestWindow.g.cs
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TestWindow.baml

@@ -16,12 +16,13 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    // to do : search
-    //       : testing
+    // to do : testing
     //       : password/email change
-    //       : some statistic 
+    //       : some statistic
+
     public partial class MainMenu : Window
     {
+        private User user;
         internal MainMenu(User student)
         {
             InitializeComponent();
@@ -34,7 +35,22 @@ namespace sqlProject
                 db.Tests.Load();
                 ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
             }
-            DataContext = student;
+            DataContext = user = student;
+        }
+
+        private void SearchFilterChanged(object sender, TextChangedEventArgs e)
+        {
+            using (DatabaseContext db = new())
+            {
+                db.Tests.Where(test => ((TextBox)sender).Text == "" || test.Name.Contains(((TextBox)sender).Text)).Load();
+                ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
+            }
+        }
+
+        private void DoTest(object sender, SelectionChangedEventArgs e)
+        {
+            new TestWindow(user, ((Test)ListOfTests.SelectedItem)).Show();
+            Close();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 
 namespace sqlProject
 {
@@ -9,12 +7,12 @@ namespace sqlProject
     /// </summary>
     public partial class App : Application
     {
-        public Theme CurrentTheme => Resources.MergedDictionaries[2].Source.ToString().Contains("LightThemeColors.xaml") ? Theme.Light : Theme.Dark;
+        public Theme CurrentTheme => Resources.MergedDictionaries[2].Source.ToString().Contains("LightTheme.xaml") ? Theme.Light : Theme.Dark;
         public App() { }
 
         public void ChangeTheme()
         {
-            Resources.MergedDictionaries[2] = new ResourceDictionary() { Source = new Uri("styles\\" + (CurrentTheme == Theme.Dark ? "Light" : "Dark") + "ThemeColors.xaml", UriKind.Relative) };
+            Resources.MergedDictionaries[2] = new ResourceDictionary() { Source = new Uri("styles\\" + (CurrentTheme == Theme.Dark ? "Light" : "Dark") + "Theme.xaml", UriKind.Relative) };
         }
     }
 
