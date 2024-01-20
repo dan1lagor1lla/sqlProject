@@ -10,7 +10,7 @@ namespace sqlProject.model
             builder.Property("Date").HasField("date");
             builder.Property("StartTime").HasField("startTime");
             builder.Property("EndTime").HasField("endTime");
-            builder.HasMany(l => l.Answers).WithMany("Loggings");
+            builder.HasMany(l => l.Answers).WithMany("Loggings").UsingEntity<AchievementLoggingAnswer>();
         }
     }
 }

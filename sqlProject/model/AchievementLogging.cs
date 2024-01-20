@@ -18,7 +18,7 @@ namespace sqlProject.model
         public DateOnly Date => date;
         public TimeOnly StartTime => startTime;
         public TimeOnly? EndTime => endTime;
-        public List<Answer> Answers { get; private set; }
+        public List<Answer> Answers { get; private set; } = new();
 
         public AchievementLogging()
         {

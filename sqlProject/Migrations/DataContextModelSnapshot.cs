@@ -17,25 +17,16 @@ namespace sqlProject.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
-            modelBuilder.Entity("AchievementLoggingAnswer", b =>
-                {
-                    b.Property<int>("AnswersID")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LoggingsID")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("AnswersID", "LoggingsID");
-
-                    b.HasIndex("LoggingsID");
-
-                    b.ToTable("AchievementLoggingAnswer");
-                });
-
             modelBuilder.Entity("sqlProject.model.AchievementLogging", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AchievementLoggingAnswerAnswersID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AchievementLoggingAnswerLoggingsID")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateOnly>("Date")
@@ -59,13 +50,36 @@ namespace sqlProject.Migrations
 
                     b.HasIndex("TestID");
 
+                    b.HasIndex("AchievementLoggingAnswerAnswersID", "AchievementLoggingAnswerLoggingsID");
+
                     b.ToTable("AchievementLogging");
+                });
+
+            modelBuilder.Entity("sqlProject.model.AchievementLoggingAnswer", b =>
+                {
+                    b.Property<int>("AnswersID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LoggingsID")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("AnswersID", "LoggingsID");
+
+                    b.HasIndex("LoggingsID");
+
+                    b.ToTable("AchievementLoggingAnswer");
                 });
 
             modelBuilder.Entity("sqlProject.model.Answer", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AchievementLoggingAnswerAnswersID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("AchievementLoggingAnswerLoggingsID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
@@ -81,6 +95,8 @@ namespace sqlProject.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("OwnerQuestionID");
+
+                    b.HasIndex("AchievementLoggingAnswerAnswersID", "AchievementLoggingAnswerLoggingsID");
 
                     b.ToTable("Answers");
                 });
@@ -235,21 +251,6 @@ namespace sqlProject.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AchievementLoggingAnswer", b =>
-                {
-                    b.HasOne("sqlProject.model.Answer", null)
-                        .WithMany()
-                        .HasForeignKey("AnswersID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("sqlProject.model.AchievementLogging", null)
-                        .WithMany()
-                        .HasForeignKey("LoggingsID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("sqlProject.model.AchievementLogging", b =>
                 {
                     b.HasOne("sqlProject.model.User", "Student")
@@ -264,9 +265,28 @@ namespace sqlProject.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("sqlProject.model.AchievementLoggingAnswer", null)
+                        .WithMany("AchievementLoggings")
+                        .HasForeignKey("AchievementLoggingAnswerAnswersID", "AchievementLoggingAnswerLoggingsID");
+
                     b.Navigation("Student");
 
                     b.Navigation("Test");
+                });
+
+            modelBuilder.Entity("sqlProject.model.AchievementLoggingAnswer", b =>
+                {
+                    b.HasOne("sqlProject.model.Answer", null)
+                        .WithMany()
+                        .HasForeignKey("AnswersID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("sqlProject.model.AchievementLogging", null)
+                        .WithMany()
+                        .HasForeignKey("LoggingsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("sqlProject.model.Answer", b =>
@@ -276,6 +296,10 @@ namespace sqlProject.Migrations
                         .HasForeignKey("OwnerQuestionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("sqlProject.model.AchievementLoggingAnswer", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("AchievementLoggingAnswerAnswersID", "AchievementLoggingAnswerLoggingsID");
 
                     b.Navigation("OwnerQuestion");
                 });
@@ -319,6 +343,13 @@ namespace sqlProject.Migrations
                         .IsRequired();
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("sqlProject.model.AchievementLoggingAnswer", b =>
+                {
+                    b.Navigation("AchievementLoggings");
+
+                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("sqlProject.model.LoggingType", b =>

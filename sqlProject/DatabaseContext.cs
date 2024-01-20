@@ -13,6 +13,7 @@ namespace sqlProject
         public DbSet<Logging> Logging { get; set; } = null!;
         public DbSet<LoggingType> LoggingTypes { get; private set; } = null!;
         public DbSet<AchievementLogging> AchievementLogging { get; private set; } = null!;
+        public DbSet<AchievementLoggingAnswer> AchievementLoggingAnswer { get; private set; } = null!;
 
         public DatabaseContext() { }
     

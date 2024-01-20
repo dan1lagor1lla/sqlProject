@@ -18,8 +18,11 @@ namespace sqlProject
     public partial class SignInWindow : Window
     {
         private byte unsuccessfulAttemptsToLogIn = 0;
-        
-        public SignInWindow() => InitializeComponent();
+
+        public SignInWindow()
+        {
+            InitializeComponent();
+        }
 
         private void TryLogIn(object sender, RoutedEventArgs e)
         {
@@ -54,17 +57,11 @@ namespace sqlProject
                         new TeacherWindow().Show();
                         break;
                     case 2:
-                        new MainMenu(user).Show();
+                        new StudentWindow(user).Show();
                         break;
                 }
                 Close();
             }
-        }
-
-        private void SignUp(object sender, MouseButtonEventArgs e)
-        {
-            new SignUpWindow().Show();
-            Close();
         }
 
         private void RegisterUnsuccessfulAttemptToLogin()
@@ -79,6 +76,10 @@ namespace sqlProject
             }
         }
 
-        private void ChangeTheme(object sender, RoutedEventArgs e) => ((App)App.Current).ChangeTheme();
+        private void SignUp(object sender, MouseButtonEventArgs e)
+        {
+            new SignUpWindow().Show();
+            Close();
+        }
     }
 }

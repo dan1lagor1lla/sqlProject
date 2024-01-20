@@ -43,8 +43,6 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject.pdb
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\sqlProject.genruntimeconfig.cache
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\ref\sqlProject.dll
-C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\MainMenu.g.cs
-C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\MainMenu.baml
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\Azure.Core.dll
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\Azure.Identity.dll
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
@@ -195,3 +193,5 @@ C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windo
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\styles\LightTheme.baml
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TestWindow.g.cs
 C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\TestWindow.baml
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\StudentWindow.g.cs
+C:\Users\taras\OneDrive\Desktop\sql\sqlProject\sqlProject\obj\Debug\net8.0-windows\StudentWindow.baml

@@ -6,15 +6,10 @@
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
         MinWidth="500"
+        MinHeight="500"
         SizeToContent="Height"
         Style="{StaticResource WindowBaseStyle}">
     <Window.Resources>
-        <Style TargetType="TextBlock"
-               BasedOn="{StaticResource TextBlockBaseStyle}">
-            <Setter
-                Property="FontSize"
-                Value="25"/>
-        </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
             <Setter
@@ -24,55 +19,54 @@
                 Property="Padding"
                 Value="20, 10"/>
         </Style>
+        <Style TargetType="ListBox"
+               BasedOn="{StaticResource ListBoxBaseStyle}">
+            <Setter
+                Property="FontSize"
+                Value="35"/>
+        </Style>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource TextBlockBaseStyle}">
+            <Setter
+                Property="TextWrapping"
+                Value="Wrap"/>
+        </Style>
     </Window.Resources>
     <Grid
-        Margin="25, 50">
+        Margin="25, 30, 25, 0">
         <DockPanel>
             <TextBlock
+                FontSize="45"
                 DockPanel.Dock="Top"
                 Text="{Binding Path=Content}"
                 TextAlignment="Center"/>
             <TextBlock
                 DockPanel.Dock="Top"
-                FontSize="12.5"
+                FontSize="15"
                 TextAlignment="Center"
                 Margin="0,10">
                 <Run
-                    Text="1"/>
+                    Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CurrentQuestionNumber}"/>
                 <Run
                     Text="/"/>
                 <Run
-                    Text="{Binding Path=OwnerTest.Questions.Count, Mode=OneWay}"/>
+                    Name="QuantityOfQuestions"/>
             </TextBlock>
             <Button
-                HorizontalAlignment="Center"
+                Style="{DynamicResource ThemeSwitcher}"
+                DockPanel.Dock="Bottom"/>
+            <Button
+                Content="Ответить"
+                Click="ToAnswer"
                 DockPanel.Dock="Bottom"
-                Margin="0,5,0,0"
-                Content="Ответить"/>
-            <StackPanel
-                Margin="15 0, 25, 10">
-                <StackPanel
-                    Margin="0,7.5"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Text="Абсолютно положительно"
-                        FontSize="20"/>
-                    <CheckBox
-                        Margin="10, 0"
-                        VerticalAlignment="Center"/>
-                </StackPanel>
-                <StackPanel
-                    Margin="0,7.5"
-                    Orientation="Horizontal">
-                    <TextBlock
-                        Text="Абсолютно положительно"
-                        FontSize="20"/>
-                    <CheckBox
-                        Margin="10, 0"
-                        VerticalAlignment="Center"/>
-                </StackPanel>
-
-            </StackPanel>
+                HorizontalAlignment="Center"
+                Margin="0,5,0,0"/>
+            <Border
+                Style="{DynamicResource BorderBaseStyle }">
+                <ListBox
+                    Name="ListOfAnswers"
+                    ItemsSource="{Binding Path=Answers}"/>
+            </Border>
         </DockPanel>
     </Grid>
 </Window>

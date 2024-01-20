@@ -5,11 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        Name="window"
-        Height="750"
-        Width="750"
-        MinWidth="550"
-        MinHeight="800"
+        Height="800"
+        Width="650"
+        MinWidth="600"
+        MinHeight="820"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
@@ -69,8 +68,7 @@
         HorizontalAlignment="Stretch"
         VerticalAlignment="Center"
         Margin="100,25">
-        <StackPanel
-            MaxWidth="500">
+        <StackPanel>
             <TextBlock
                 Text="Создание аккаунта"
                 Margin="0,0,0,25"/>
@@ -114,17 +112,11 @@
                 Margin="0,5">
                 <Run
                     Text="У меня уже есть аккаунт"
-                    MouseDown="BackToSignInWindow"
+                    MouseDown="SignIn"
                     Style="{DynamicResource HighlightRunStyle}"/>
             </TextBlock>
             <Button
-                Template="{DynamicResource RoundedButtonTemplate}"
-                Content="{DynamicResource ThemeIcon}"
-                Click="ChangeTheme"
-                Background="Transparent"
-                BorderThickness="0"
-                Cursor="Hand"
-                HorizontalAlignment="Center"/>
+                Style="{DynamicResource ThemeSwitcher}"/>
         </StackPanel>
     </Grid>
 </Window>

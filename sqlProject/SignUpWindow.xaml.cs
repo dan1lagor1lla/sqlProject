@@ -20,7 +20,6 @@ namespace sqlProject
         private const int MinimalPasswordLength = 8;
         private const int MinimalLoginLength = 8;
 
-        private char[] Digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
         private char[] SpecialSymbols = ['@', '#', '%', '&', '*', '$'];
         
         public SignUpWindow()
@@ -37,19 +36,12 @@ namespace sqlProject
                     new NotificationWindow("Пользователь с этим именем уже существует!").ShowDialog();
                     return;
                 }
-                User newUser = new User(LoginInput.Text, EmailInput.Text, PasswordInput.Text, db.UserTypes.Single(type => type.ID == 2));
-                db.Users.Add(newUser);
+                db.Users.Add(new User(LoginInput.Text, EmailInput.Text, PasswordInput.Text, db.UserTypes.Single(type => type.ID == 2)));
                 db.SaveChanges();
                 new NotificationWindow("Вы успешно зарегистрировались!").ShowDialog();
                 new SignInWindow().Show();
                 Close();
             }
-        }
-
-        private void BackToSignInWindow(object sender, MouseButtonEventArgs e)
-        {
-            new SignInWindow().Show();
-            Close();
         }
 
         private bool СheckСomplianceWithRequirements(TextBox textbox, TextBlock adviceTextBlock, Dictionary<Predicate<string>, string> requirements, bool effectAdviceTextBlock = false)
@@ -85,13 +77,13 @@ namespace sqlProject
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => !str.Contains('@')] = "Не забудьте '@'",
-                [str => !str.Split('@')[1].Contains(".com") && !str.Split('@')[1].Contains(".ru")] = "Почта должна содержать доменное имя",
+                [str => !str.EndsWith(".ru") && !str.EndsWith(".com")] = "Почта должна содержать доменное имя",
             }) & СheckСomplianceWithRequirements(PasswordInput, PasswordInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
-                [str => !ContainsAtLeastOneOf(str, SpecialSymbols)] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !ContainsAtLeastOneOf(str, Digits)] = "Пароль должен содержать хотя бы одну цифру"
+                [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
+                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -109,13 +101,13 @@ namespace sqlProject
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => !str.Contains('@')] = "Не забудьте '@'",
-                [str => !str.Split('@')[1].Contains(".com") && !str.Split('@')[1].Contains(".ru")] = "Почта должна содержать доменное имя",
+                [str => !str.EndsWith(".ru") && !str.EndsWith(".com")] = "Почта должна содержать доменное имя",
             }, true) & СheckСomplianceWithRequirements(PasswordInput, PasswordInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
-                [str => !ContainsAtLeastOneOf(str, SpecialSymbols)] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !ContainsAtLeastOneOf(str, Digits)] = "Пароль должен содержать хотя бы одну цифру"
+                [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
+                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -133,13 +125,13 @@ namespace sqlProject
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => !str.Contains('@')] = "Не забудьте '@'",
-                [str => !str.Split('@')[1].Contains(".com") && !str.Split('@')[1].Contains(".ru")] = "Почта должна содержать доменное имя",
+                [str => !str.EndsWith(".ru") && !str.EndsWith(".com")] = "Почта должна содержать доменное имя",
             }) & СheckСomplianceWithRequirements(PasswordInput, PasswordInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
-                [str => !ContainsAtLeastOneOf(str, SpecialSymbols)] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !ContainsAtLeastOneOf(str, Digits)] = "Пароль должен содержать хотя бы одну цифру"
+                [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
+                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
             }, true) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -157,13 +149,13 @@ namespace sqlProject
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => !str.Contains('@')] = "Не забудьте '@'",
-                [str => !str.Split('@')[1].Contains(".com") && !str.Split('@')[1].Contains(".ru")] = "Почта должна содержать доменное имя",
+                [str => !str.EndsWith(".ru") && !str.EndsWith(".com")] = "Почта должна содержать доменное имя",
             }) & СheckСomplianceWithRequirements(PasswordInput, PasswordInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
-                [str => !ContainsAtLeastOneOf(str, SpecialSymbols)] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !ContainsAtLeastOneOf(str, Digits)] = "Пароль должен содержать хотя бы одну цифру"
+                [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
+                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -171,14 +163,10 @@ namespace sqlProject
             }, true);
         }
 
-        private bool ContainsAtLeastOneOf(string str, params char[] symbols)
+        private void SignIn(object sender, MouseButtonEventArgs e)
         {
-            foreach (char symbol in symbols)
-                if (str.Contains(symbol))
-                    return true;
-            return false;
+            new SignInWindow().Show();
+            Close();
         }
-
-        private void ChangeTheme(object sender, RoutedEventArgs e) => ((App)App.Current).ChangeTheme();
     }
 }

@@ -19,22 +19,48 @@ namespace sqlProject
 {
     public partial class TestWindow : Window
     {
+        private DatabaseContext db = new();
+        private AchievementLogging log;
         private List<Question> questions = new List<Question>();
-        private int CurrentQuestionNumber = 1;
+        public static DependencyProperty CurrentQuestionNumberProperty;
+
+        public int CurrentQuestionNumber
+        {
+            get => (int)GetValue(CurrentQuestionNumberProperty);
+            set => SetValue(CurrentQuestionNumberProperty, value);
+        }
+
+        static TestWindow()
+        {
+            CurrentQuestionNumberProperty = DependencyProperty.Register("CurrentQuestionNumber", typeof(int), typeof(TestWindow));
+        }
 
         internal TestWindow(User user, Test test)
         {
             InitializeComponent();
+            
+            db.UpdateRange(user, test);
+            db.Questions.Where(q => q.OwnerTest == test && q.IsUsing).Include(q => q.Answers).Load();
+            questions = db.Questions.Local.ToList();
+            log = new AchievementLogging(user, test);
+            db.AchievementLogging.Add(log);
+            db.SaveChanges();
+
+            CurrentQuestionNumber = 1;
+            QuantityOfQuestions.Text = questions.Count.ToString();
             Title = test.Name;
-            using (DatabaseContext db = new())
-            {
-                db.UpdateRange(user, test);
-                db.Tests.Where(t => t.ID == test.ID).Include(t => t.Questions).Load();
-                questions = db.Questions.Local.ToList();
-                db.AchievementLogging.Add(new AchievementLogging(user, test));
-                db.SaveChanges();
-            }
             DataContext = questions[0];
+        }
+
+        private void ToAnswer(object sender, RoutedEventArgs e)
+        {
+            List<Answer> answers = new List<Answer>();
+            foreach (Answer answer in ListOfAnswers.SelectedItems)
+                answers.Add(answer);
+            log.Answers.AddRange(answers);
+            if (CurrentQuestionNumber != questions.Count)
+                DataContext = questions[CurrentQuestionNumber++];
+            db.SaveChanges();   
         }
     }
 }
