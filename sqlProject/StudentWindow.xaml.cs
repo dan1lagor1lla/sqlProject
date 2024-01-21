@@ -16,7 +16,7 @@ using sqlProject.model;
 
 namespace sqlProject
 {
-    // to do : new window password/email change
+    // to do : личный кабинет with new window password/email change
     //       : some statistic
 
     public partial class StudentWindow : Window
@@ -26,12 +26,14 @@ namespace sqlProject
         internal StudentWindow(User student)
         {
             InitializeComponent();
-
+            Closed += LogOut;
+            
             using (DatabaseContext db = new())
             {
                 db.Users.Update(student);
                 db.Logging.Add(new Logging(student, db.LoggingTypes.Single(logType => logType.ID == 1)));
                 db.SaveChanges();
+
                 db.Tests.Load();
                 ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
             }
@@ -47,9 +49,21 @@ namespace sqlProject
             }
         }
 
-        private void DoTest(object sender, SelectionChangedEventArgs e)
+        private void DoTest(object sender, SelectionChangedEventArgs e) => new TestWindow(user, (Test)ListOfTests.SelectedItem).ShowDialog();
+
+        private void LogOut(object? sender, EventArgs e)
         {
-            new TestWindow(user, (Test)ListOfTests.SelectedItem).Show();
+            using (DatabaseContext db = new())
+            {
+                db.Users.Update(user);
+                db.Logging.Add(new Logging(user, db.LoggingTypes.Single(logType => logType.ID == 2)));
+                db.SaveChanges();
+            }
+        }
+
+        private void CloseStudentWindow(object sender, RoutedEventArgs e)
+        {
+            new SignInWindow().Show();
             Close();
         }
     }

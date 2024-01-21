@@ -36,7 +36,7 @@ namespace sqlProject
                     new NotificationWindow("Пользователь с этим именем уже существует!").ShowDialog();
                     return;
                 }
-                db.Users.Add(new User(LoginInput.Text, EmailInput.Text, PasswordInput.Text, db.UserTypes.Single(type => type.ID == 2)));
+                db.Users.Add(new User(LoginInput.Text, PasswordInput.Text, db.UserTypes.Single(type => type.ID == 2), EmailInput.Text));
                 db.SaveChanges();
                 new NotificationWindow("Вы успешно зарегистрировались!").ShowDialog();
                 new SignInWindow().Show();
@@ -72,7 +72,8 @@ namespace sqlProject
             TrySignUpButton.IsEnabled = СheckСomplianceWithRequirements(LoginInput, LoginInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
-                [str => str.Length < MinimalPasswordLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов"
+                [str => str.Length < MinimalLoginLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов",
+                [str => !str.All(character => char.IsLetterOrDigit(character) || character == '-')] = "Логин может содержать только буквы, цифры и дефис."
             }, true) & СheckСomplianceWithRequirements(EmailInput, EmailInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -83,7 +84,7 @@ namespace sqlProject
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
                 [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
+                [str => !str.Any(character => char.IsDigit(character))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -96,7 +97,8 @@ namespace sqlProject
             TrySignUpButton.IsEnabled = СheckСomplianceWithRequirements(LoginInput, LoginInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
-                [str => str.Length < MinimalPasswordLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов"
+                [str => str.Length < MinimalLoginLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов",
+                [str => !str.All(character => char.IsLetterOrDigit(character) || character == '-')] = "Логин может содержать только буквы, цифры и дефис."
             }) & СheckСomplianceWithRequirements(EmailInput, EmailInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -107,7 +109,7 @@ namespace sqlProject
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
                 [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
+                [str => !str.Any(character => char.IsDigit(character))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -120,7 +122,8 @@ namespace sqlProject
             TrySignUpButton.IsEnabled = СheckСomplianceWithRequirements(LoginInput, LoginInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
-                [str => str.Length < MinimalPasswordLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов"
+                [str => str.Length < MinimalLoginLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов",
+                [str => !str.All(character => char.IsLetterOrDigit(character) || character == '-')] = "Логин может содержать только буквы, цифры и дефис."
             }) & СheckСomplianceWithRequirements(EmailInput, EmailInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -131,7 +134,7 @@ namespace sqlProject
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
                 [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
+                [str => !str.Any(character => char.IsDigit(character))] = "Пароль должен содержать хотя бы одну цифру"
             }, true) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -144,7 +147,8 @@ namespace sqlProject
             TrySignUpButton.IsEnabled = СheckСomplianceWithRequirements(LoginInput, LoginInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
-                [str => str.Length < MinimalPasswordLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов"
+                [str => str.Length < MinimalLoginLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов",
+                [str => !str.All(character => char.IsLetterOrDigit(character) || character == '-')] = "Логин может содержать только буквы, цифры и дефис."
             }) & СheckСomplianceWithRequirements(EmailInput, EmailInputAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",
@@ -155,7 +159,7 @@ namespace sqlProject
                 [str => str.Length == 0] = "Заполните поле",
                 [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
                 [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
-                [str => !str.Any(character => byte.TryParse(character.ToString(), out _))] = "Пароль должен содержать хотя бы одну цифру"
+                [str => !str.Any(character => char.IsDigit(character))] = "Пароль должен содержать хотя бы одну цифру"
             }) & СheckСomplianceWithRequirements(PasswordInputCheck, PasswordInputCheckAdvice, new Dictionary<Predicate<string>, string>()
             {
                 [str => str.Length == 0] = "Заполните поле",

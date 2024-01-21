@@ -123,6 +123,64 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="TextBoxDownLineBaseStyle"
+           TargetType="TextBox">
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+        <Setter
+            Property="Foreground"
+            Value="{DynamicResource TextBrush}"/>
+        <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource AdditionalBrush}"/>
+        <Setter
+            Property="SelectionBrush"
+            Value="{DynamicResource TextBrush}"/>
+        <Setter
+            Property="CaretBrush"
+            Value="{DynamicResource TextBrush}"/>
+        <Setter
+            Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu
+                    Visibility="Hidden"/>
+            </Setter.Value>
+        </Setter>
+        <Setter
+            Property="BorderThickness"
+            Value="0,0,0,3"/>
+        <Style.Triggers>
+            <EventTrigger
+                RoutedEvent="GotKeyboardFocus">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard
+                            Timeline.DesiredFrameRate="60">
+                            <ThicknessAnimation
+                                Storyboard.TargetProperty="BorderThickness"
+                                To="0,0,0,5"
+                                Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+            <EventTrigger
+                RoutedEvent="LostKeyboardFocus">
+                <EventTrigger.Actions>
+                    <BeginStoryboard>
+                        <Storyboard
+                            Timeline.DesiredFrameRate="60">
+                            <ThicknessAnimation
+                                Storyboard.TargetProperty="BorderThickness"
+                                To="0,0,0,2"
+                                Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger.Actions>
+            </EventTrigger>
+        </Style.Triggers>
+    </Style>
     <Style x:Key="HighlightRunStyle"
            TargetType="Run">
         <Style.Setters>
@@ -169,5 +227,38 @@
         <Setter
             Property="BorderThickness"
             Value="0"/>
+    </Style>
+    <Style x:Key="CheckBoxStyle"
+           x:Shared="False"
+           TargetType="ToggleButton">
+        <Setter
+            Property="Template"
+            Value="{StaticResource CheckBox}"/>
+        <Style.Triggers>
+            <Trigger
+                Property="IsChecked"
+                Value="True">
+                <Setter
+                    Property="Content">
+                    <Setter.Value>
+                        <Image
+                            Source="..\images\check.png"
+                            Height="25"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger
+                Property="IsChecked"
+                Value="False">
+                <Setter
+                    Property="Content">
+                    <Setter.Value>
+                        <Image
+                            Source="..\images\uncheck.png"
+                            Height="25"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

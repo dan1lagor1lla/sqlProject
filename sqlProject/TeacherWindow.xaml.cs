@@ -157,14 +157,10 @@ namespace sqlProject
             ((ListBox)sender).SelectedItem = null;
         }
 
-        private void ChangeIcon(object sender, RoutedEventArgs e)
+        private void CloseTeacherWindow(object sender, RoutedEventArgs e)
         {
-            ToggleButton toggle = (ToggleButton)sender;
-            if (toggle.IsChecked == true)
-                ((Image)toggle.Content).Source = new BitmapImage(new Uri("images/check.png", UriKind.Relative));
-            else
-                ((Image)toggle.Content).Source = new BitmapImage(new Uri("images/uncheck.png", UriKind.Relative));
-
+            new SignInWindow().Show();
+            Close();
         }
     }
 }

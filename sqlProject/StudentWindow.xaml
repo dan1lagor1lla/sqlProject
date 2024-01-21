@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
         SizeToContent="WidthAndHeight"
-        FontSize="50"
         MinWidth="850"
         MinHeight="500"
         WindowStartupLocation="CenterScreen"
@@ -45,7 +44,23 @@
                 Value="Wrap"/>
         </Style>
         <Style TargetType="Button"
-               BasedOn="{StaticResource ButtonBaseStyle}"/>
+               BasedOn="{StaticResource ButtonBaseStyle}">
+            <Setter
+                Property="FontSize"
+                Value="20"/>
+            <Setter
+                Property="HorizontalAlignment"
+                Value="Center"/>
+            <Setter
+                Property="HorizontalContentAlignment"
+                Value="Center"/>
+            <Setter
+                Property="Padding"
+                Value="20,10"/>
+            <Setter
+                Property="Margin"
+                Value="2.5,2.5,2.5,0"/>
+        </Style>
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
     </Window.Resources>
@@ -94,20 +109,32 @@
         <Border
             Style="{DynamicResource BorderBaseStyle}"
             Grid.Column="2"
-            Grid.RowSpan="2">
+            Grid.RowSpan="2"
+            Padding="25,20,25,7.5">
             <DockPanel>
-                <Button
+                <WrapPanel
+                    Orientation="Horizontal"
                     DockPanel.Dock="Bottom"
-                    Style="{DynamicResource ThemeSwitcher}"
-                    Grid.Row="2"
-                    Grid.ColumnSpan="3"/>
+                    HorizontalAlignment="Left">
+                    <Button
+                        Content="Личный кабинет"
+                        DockPanel.Dock="Bottom"/>
+                    <Button
+                        Content="Выйти"
+                        Click="CloseStudentWindow"
+                        DockPanel.Dock="Bottom"/>
+                </WrapPanel>
                 <TextBlock
                     Text="{Binding StringFormat=Добро пожаловать\,\ {0}, Path=Login}"
                     DockPanel.Dock="Top"
-                    Padding="25, 20"
                     FontSize="25"
                     TextAlignment="Center"/>
             </DockPanel>
         </Border>
+        <Button
+            Style="{DynamicResource ThemeSwitcher}"
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Margin="0,10,0,0"/>
     </Grid>
 </Window>

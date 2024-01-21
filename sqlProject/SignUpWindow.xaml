@@ -65,7 +65,7 @@
         </Style>
     </Window.Resources>
     <Grid
-        HorizontalAlignment="Stretch"
+        HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="100,25">
         <StackPanel>

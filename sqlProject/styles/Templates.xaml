@@ -98,6 +98,24 @@
                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Border>
     </ControlTemplate>
+    <ControlTemplate x:Key="CheckBox"
+                     TargetType="ToggleButton">
+        <Border
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="{TemplateBinding Background}"
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Margin="{TemplateBinding Margin}"
+            MaxWidth="{TemplateBinding MaxWidth}"
+            Cursor="{TemplateBinding Cursor}"
+            Padding="{TemplateBinding Padding}"
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <ContentPresenter
+                Content="{TemplateBinding Content}"/>
+        </Border>
+    </ControlTemplate>
     <!--<ControlTemplate x:Key="WindowTemplate"
                          TargetType="Window">
         <Border

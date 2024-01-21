@@ -51,7 +51,7 @@ namespace sqlProject
                     RegisterUnsuccessfulAttemptToLogin();
                     return;
                 }
-                switch (user.TypeID)
+                switch (user.UserTypeID)
                 {
                     case 1:
                         new TeacherWindow().Show();
