@@ -19,10 +19,11 @@ namespace sqlProject
 {
     public partial class TestWindow : Window
     {
+        public static DependencyProperty CurrentQuestionNumberProperty;
+
         private DatabaseContext db = new();
         private AchievementLogging log;
         private List<Question> questions = new List<Question>();
-        public static DependencyProperty CurrentQuestionNumberProperty;
 
         public int CurrentQuestionNumber
         {
@@ -30,18 +31,17 @@ namespace sqlProject
             set => SetValue(CurrentQuestionNumberProperty, value);
         }
 
-        static TestWindow()
-        {
-            CurrentQuestionNumberProperty = DependencyProperty.Register("CurrentQuestionNumber", typeof(int), typeof(TestWindow));
-        }
-
+        static TestWindow() => CurrentQuestionNumberProperty = DependencyProperty.Register("CurrentQuestionNumber", typeof(int), typeof(TestWindow));
+        
         internal TestWindow(User user, Test test)
         {
             InitializeComponent();
             
             db.UpdateRange(user, test);
+
             db.Questions.Where(q => q.OwnerTest == test && q.IsUsing).Include(q => q.Answers).Load();
             questions = db.Questions.Local.ToList();
+            
             log = new AchievementLogging(user, test);
             db.AchievementLogging.Add(log);
             db.SaveChanges();
@@ -52,15 +52,25 @@ namespace sqlProject
             DataContext = questions[0];
         }
 
-        private void ToAnswer(object sender, RoutedEventArgs e)
+        private void Answer(object sender, RoutedEventArgs e)
         {
-            List<Answer> answers = new List<Answer>();
-            foreach (Answer answer in ListOfAnswers.SelectedItems)
-                answers.Add(answer);
-            log.Answers.AddRange(answers);
-            if (CurrentQuestionNumber != questions.Count)
+            for (int i = 0; i < ListOfAnswers.SelectedItems.Count; ++i)
+                log.Answers.Add((Answer)ListOfAnswers.SelectedItems[i]!);
+
+            if (CurrentQuestionNumber == questions.Count)
+            {
+                log.Finish();
+                db.SaveChanges();
+                db.Dispose();
+                new NotificationWindow("Вы прошли тест.").ShowDialog();
+                new StudentWindow(log.Student).Show();
+                Close();
+            }
+            else
+            {
                 DataContext = questions[CurrentQuestionNumber++];
-            db.SaveChanges();   
+                db.SaveChanges();
+            }
         }
     }
 }

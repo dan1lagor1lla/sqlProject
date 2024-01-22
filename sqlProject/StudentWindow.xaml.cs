@@ -21,44 +21,36 @@ namespace sqlProject
 
     public partial class StudentWindow : Window
     {
-        private User user;
+        private DatabaseContext db = new();
 
         internal StudentWindow(User student)
         {
             InitializeComponent();
             Closed += LogOut;
             
-            using (DatabaseContext db = new())
-            {
-                db.Users.Update(student);
-                db.Logging.Add(new Logging(student, db.LoggingTypes.Single(logType => logType.ID == 1)));
-                db.SaveChanges();
+            db.Users.Update(student);
+            db.Logging.Add(new Logging(student, db.LoggingTypes.Single(logType => logType.ID == 1)));
+            db.SaveChanges();
 
-                db.Tests.Load();
-                ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
-            }
-            DataContext = user = student;
+            db.Tests.Load();
+            ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
+
+            DataContext = student;
         }
 
         private void SearchFilterChanged(object sender, TextChangedEventArgs e)
         {
-            using (DatabaseContext db = new())
-            {
-                db.Tests.Where(test => ((TextBox)sender).Text == "" || test.Name.Contains(((TextBox)sender).Text)).Load();
-                ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
-            }
+            TextBox searchBox = (TextBox)sender;
+            ListOfTests.ItemsSource = db.Tests.Where(test => searchBox.Text == "" || test.Name.Contains(searchBox.Text)).ToList();
         }
 
-        private void DoTest(object sender, SelectionChangedEventArgs e) => new TestWindow(user, (Test)ListOfTests.SelectedItem).ShowDialog();
+        private void DoTest(object sender, SelectionChangedEventArgs e) => new TestWindow((User)DataContext, (Test)ListOfTests.SelectedItem).ShowDialog();
 
         private void LogOut(object? sender, EventArgs e)
         {
-            using (DatabaseContext db = new())
-            {
-                db.Users.Update(user);
-                db.Logging.Add(new Logging(user, db.LoggingTypes.Single(logType => logType.ID == 2)));
-                db.SaveChanges();
-            }
+            db.Logging.Add(new Logging((User)DataContext, db.LoggingTypes.Single(logType => logType.ID == 2)));
+            db.SaveChanges();
+            db.Dispose();
         }
 
         private void CloseStudentWindow(object sender, RoutedEventArgs e)

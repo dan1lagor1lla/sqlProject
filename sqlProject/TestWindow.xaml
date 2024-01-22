@@ -30,20 +30,21 @@
             <Setter
                 Property="TextWrapping"
                 Value="Wrap"/>
+            <Setter
+                Property="TextAlignment"
+                Value="Center"/>
         </Style>
     </Window.Resources>
     <Grid
         Margin="25, 30, 25, 0">
         <DockPanel>
             <TextBlock
-                FontSize="45"
-                DockPanel.Dock="Top"
                 Text="{Binding Path=Content}"
-                TextAlignment="Center"/>
+                DockPanel.Dock="Top"
+                FontSize="45"/>
             <TextBlock
                 DockPanel.Dock="Top"
                 FontSize="15"
-                TextAlignment="Center"
                 Margin="0,10">
                 <Run
                     Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=CurrentQuestionNumber}"/>
@@ -57,15 +58,15 @@
                 DockPanel.Dock="Bottom"/>
             <Button
                 Content="Ответить"
-                Click="ToAnswer"
+                Click="Answer"
                 DockPanel.Dock="Bottom"
-                HorizontalAlignment="Center"
                 Margin="0,5,0,0"/>
             <Border
-                Style="{DynamicResource BorderBaseStyle }">
+                Style="{DynamicResource BorderBaseStyle}">
                 <ListBox
                     Name="ListOfAnswers"
-                    ItemsSource="{Binding Path=Answers}"/>
+                    ItemsSource="{Binding Path=Answers}"
+                    SelectionMode="Multiple"/>
             </Border>
         </DockPanel>
     </Grid>

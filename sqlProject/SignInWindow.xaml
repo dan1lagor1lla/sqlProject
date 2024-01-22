@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        MinHeight="520"
+        MinHeight="530"
         MinWidth="450"
         Width="600"
         Height="775"
@@ -47,7 +47,8 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="50, 20">
-        <StackPanel>
+        <StackPanel
+            MaxWidth="600">
             <TextBlock
                 Text="Авторизируйтесь, чтобы начать"
                 Margin="0,0,0,25"/>

@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:sqlProject"
         mc:Ignorable="d"
-        Height="800"
         Width="650"
-        MinWidth="600"
-        MinHeight="820"
+        MinWidth="550"
+        MinHeight="875"
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
@@ -62,23 +61,35 @@
             <Setter
                 Property="Foreground"
                 Value="{DynamicResource AlarmBrush}"/>
+            <Style.Triggers>
+                <Trigger
+                    Property="Text"
+                    Value="{x:Null}">
+                    <Setter
+                        Property="Visibility"
+                        Value="Collapsed"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         Margin="100,25">
-        <StackPanel>
+        <StackPanel
+            MaxWidth="500">
             <TextBlock
                 Text="Создание аккаунта"
                 Margin="0,0,0,25"/>
             <TextBox
                 Name="LoginInput"
                 TextChanged="LoginInputChanged"
-                Uid="Логин"/>
+                Uid="Логин">
+            </TextBox>
             <TextBlock
                 Name="LoginInputAdvice"
-                Style="{StaticResource AdviceTextBlock}"/>
+                Style="{StaticResource AdviceTextBlock}"
+                Text="{Binding ElementName=LoginInput, Path=DataContext, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBox
                 Name="EmailInput"
                 TextChanged="EmailInputChanged"

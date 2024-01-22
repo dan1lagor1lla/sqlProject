@@ -25,6 +25,35 @@ namespace sqlProject
         public SignUpWindow()
         {
             InitializeComponent();
+
+            //LoginInput.Resources.Add("messageOutput", LoginInputAdvice);
+            //LoginInput.Resources.Add("conditions", new Dictionary<Predicate<string>, string>()
+            //{
+            //    [str => str.Length == 0] = "Заполните поле",
+            //    [str => str.Length < MinimalLoginLength] = $"Логин должен быть не меньше {MinimalLoginLength} символов",
+            //    [str => !str.All(character => char.IsLetterOrDigit(character) || character == '-')] = "Логин может содержать только буквы, цифры и дефис."
+            //});
+            //EmailInput.Resources.Add("messageOutput", EmailInputAdvice);
+            //EmailInput.Resources.Add("conditions", new Dictionary<Predicate<string>, string>()
+            //{
+            //    [str => str.Length == 0] = "Заполните поле",
+            //    [str => !str.Contains('@')] = "Не забудьте '@'",
+            //    [str => !str.EndsWith(".ru") && !str.EndsWith(".com")] = "Почта должна содержать доменное имя",
+            //});
+            //PasswordInput.Resources.Add("messageOutput", PasswordInputAdvice);
+            //PasswordInput.Resources.Add("conditions", new Dictionary<Predicate<string>, string>()
+            //{
+            //    [str => str.Length == 0] = "Заполните поле",
+            //    [str => str.Length < MinimalPasswordLength] = $"Пароль должен быть не меньше {MinimalPasswordLength} символов",
+            //    [str => str.Intersect(SpecialSymbols).Count() == 0] = $"Пароль должен содержать хотя бы один специальный символ - {string.Concat(SpecialSymbols)}",
+            //    [str => !str.Any(character => char.IsDigit(character))] = "Пароль должен содержать хотя бы одну цифру"
+            //});
+            //PasswordInputCheck.Resources.Add("messageOutput", PasswordInputCheckAdvice);
+            //PasswordInputCheck.Resources.Add("conditions", new Dictionary<Predicate<string>, string>()
+            //{
+            //    [str => str.Length == 0] = "Заполните поле",
+            //    [str => str != PasswordInput.Text] = "Пароли не совпадают"
+            //});
         }
 
         private void TrySignUp(object sender, RoutedEventArgs e)
@@ -33,7 +62,7 @@ namespace sqlProject
             {
                 if (db.Users.SingleOrDefault(user => user.Login == LoginInput.Text) is not null)
                 {
-                    new NotificationWindow("Пользователь с этим именем уже существует!").ShowDialog();
+                    new NotificationWindow("Пользователь с этим логином уже существует!").ShowDialog();
                     return;
                 }
                 db.Users.Add(new User(LoginInput.Text, PasswordInput.Text, db.UserTypes.Single(type => type.ID == 2), EmailInput.Text));
@@ -43,6 +72,17 @@ namespace sqlProject
                 Close();
             }
         }
+
+        //private void ValidateInput()
+        //{
+        //    foreach (TextBox box in new TextBox[] { LoginInput, PasswordInput, EmailInput, PasswordInputCheck })
+        //        if (!(bool)box.Resources["IsInputCorrect"])
+        //        {
+        //            TrySignUpButton.IsEnabled = false;
+        //            return;
+        //        }
+        //    TrySignUpButton.IsEnabled = true;
+        //}
 
         private bool СheckСomplianceWithRequirements(TextBox textbox, TextBlock adviceTextBlock, Dictionary<Predicate<string>, string> requirements, bool effectAdviceTextBlock = false)
         {

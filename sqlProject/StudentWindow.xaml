@@ -28,20 +28,14 @@
                 Property="Margin"
                 Value="15"/>
         </Style>
-        <Style TargetType="TextBox"
-               BasedOn="{StaticResource TextBoxWithPlaceholderBaseStyle}">
-            <Setter
-                Property="VerticalAlignment"
-                Value="Center"/>
-            <Setter
-                Property="Padding"
-                Value="5, 7.5"/>
-        </Style>
         <Style TargetType="TextBlock"
                BasedOn="{StaticResource TextBlockBaseStyle}">
             <Setter
                 Property="TextWrapping"
                 Value="Wrap"/>
+            <Setter
+                Property="TextAlignment"
+                Value="Center"/>
         </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
@@ -49,17 +43,14 @@
                 Property="FontSize"
                 Value="20"/>
             <Setter
-                Property="HorizontalAlignment"
-                Value="Center"/>
-            <Setter
-                Property="HorizontalContentAlignment"
-                Value="Center"/>
-            <Setter
                 Property="Padding"
                 Value="20,10"/>
             <Setter
                 Property="Margin"
                 Value="2.5,2.5,2.5,0"/>
+        </Style>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource TextBoxWithPlaceholderBaseStyle}">
         </Style>
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
@@ -74,6 +65,7 @@
                 Width="Auto"/>
             <ColumnDefinition
                 MinWidth="300"
+                MaxWidth="500"
                 Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -109,13 +101,13 @@
         <Border
             Style="{DynamicResource BorderBaseStyle}"
             Grid.Column="2"
-            Grid.RowSpan="2"
-            Padding="25,20,25,7.5">
+            Grid.RowSpan="2">
             <DockPanel>
                 <WrapPanel
                     Orientation="Horizontal"
                     DockPanel.Dock="Bottom"
-                    HorizontalAlignment="Left">
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,2.5">
                     <Button
                         Content="Личный кабинет"
                         DockPanel.Dock="Bottom"/>
@@ -128,7 +120,7 @@
                     Text="{Binding StringFormat=Добро пожаловать\,\ {0}, Path=Login}"
                     DockPanel.Dock="Top"
                     FontSize="25"
-                    TextAlignment="Center"/>
+                    Padding="25,20"/>
             </DockPanel>
         </Border>
         <Button
