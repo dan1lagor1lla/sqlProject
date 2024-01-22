@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         MinWidth="500"
         MinHeight="500"
-        SizeToContent="Height"
+        SizeToContent="WidthAndHeight"
         Style="{StaticResource WindowBaseStyle}">
     <Window.Resources>
         <Style TargetType="Button"

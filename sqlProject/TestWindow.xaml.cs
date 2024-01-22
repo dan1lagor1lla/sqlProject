@@ -54,6 +54,11 @@ namespace sqlProject
 
         private void Answer(object sender, RoutedEventArgs e)
         {
+            if (ListOfAnswers.SelectedItems.Count == 0)
+            {
+                new NotificationWindow("Выберите правильный(е) ответы(ы)!").ShowDialog();
+                return;
+            }
             for (int i = 0; i < ListOfAnswers.SelectedItems.Count; ++i)
                 log.Answers.Add((Answer)ListOfAnswers.SelectedItems[i]!);
 
@@ -63,7 +68,6 @@ namespace sqlProject
                 db.SaveChanges();
                 db.Dispose();
                 new NotificationWindow("Вы прошли тест.").ShowDialog();
-                new StudentWindow(log.Student).Show();
                 Close();
             }
             else

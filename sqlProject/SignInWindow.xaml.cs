@@ -56,12 +56,9 @@ namespace sqlProject
                     case 1:
                         new TeacherWindow().Show();
                         break;
-                    case 2:
+                    default:
                         new StudentWindow(user).Show();
                         break;
-                    default:
-                        new NotificationWindow("Неизвестный тип пользователя").Show();
-                        return;
                 }
                 Close();
             }
