@@ -6,6 +6,17 @@
     <SolidColorBrush x:Key="AlarmBrush" Color="#a82525"/>
     <Image x:Key="ThemeIcon"
            Height="25"
-           Source="..\images\moon-icon.png">
-    </Image>
+           Source="..\images\moon-icon.png"/>
+    <Image x:Key="BinIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\black-bin-icon.png"/>
+    <Image x:Key="CheckIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\black-check-icon.png"/>
+    <Image x:Key="UncheckIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\black-uncheck-icon.png"/>
 </ResourceDictionary>

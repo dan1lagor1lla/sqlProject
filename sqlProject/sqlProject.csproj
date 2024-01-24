@@ -11,8 +11,14 @@
 
   <ItemGroup>
     <None Remove="bin.png" />
+    <None Remove="images\black-bin-icon.png" />
+    <None Remove="images\black-check-icon.png" />
+    <None Remove="images\black-uncheck-icon.png" />
     <None Remove="images\check.png" />
     <None Remove="images\uncheck.png" />
+    <None Remove="images\white-bin-icon.png" />
+    <None Remove="images\white-check-icon.png" />
+    <None Remove="images\white-uncheck-icon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +32,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="images\binIcon.png">
+    <Resource Include="images\black-bin-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="images\check.png">
+    <Resource Include="images\black-uncheck-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\black-check-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="images\moon-icon.png">
@@ -38,7 +47,13 @@
     <Resource Include="images\sun-icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="images\uncheck.png">
+    <Resource Include="images\white-bin-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\white-check-icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="images\white-uncheck-icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

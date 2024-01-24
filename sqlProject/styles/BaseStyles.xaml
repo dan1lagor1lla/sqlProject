@@ -228,36 +228,36 @@
             Property="BorderThickness"
             Value="0"/>
     </Style>
+    
     <Style x:Key="CheckBoxStyle"
            x:Shared="False"
            TargetType="ToggleButton">
         <Setter
             Property="Template"
-            Value="{StaticResource CheckBox}"/>
+            Value="{DynamicResource CheckBox}"/>
+        <Setter
+            Property="Cursor"
+            Value="Hand"/>
+        <Setter
+            Property="Background"
+            Value="Transparent"/>
+        <Setter
+            Property="BorderThickness"
+            Value="0"/>
         <Style.Triggers>
             <Trigger
                 Property="IsChecked"
                 Value="True">
                 <Setter
-                    Property="Content">
-                    <Setter.Value>
-                        <Image
-                            Source="..\images\check.png"
-                            Height="25"/>
-                    </Setter.Value>
-                </Setter>
+                    Property="Content"
+                    Value="{DynamicResource CheckIcon}"/>
             </Trigger>
             <Trigger
                 Property="IsChecked"
                 Value="False">
                 <Setter
-                    Property="Content">
-                    <Setter.Value>
-                        <Image
-                            Source="..\images\uncheck.png"
-                            Height="25"/>
-                    </Setter.Value>
-                </Setter>
+                    Property="Content"
+                    Value="{DynamicResource UncheckIcon}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -8,4 +8,16 @@
            Height="25"
            Source="..\images\sun-icon.png">
     </Image>
+    <Image x:Key="BinIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\white-bin-icon.png"/>
+    <Image x:Key="CheckIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\white-check-icon.png"/>
+    <Image x:Key="UncheckIcon"
+           x:Shared="False"
+           Height="25"
+           Source="..\images\white-uncheck-icon.png"/>
 </ResourceDictionary>

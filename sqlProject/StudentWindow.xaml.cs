@@ -21,42 +21,53 @@ namespace sqlProject
 
     public partial class StudentWindow : Window
     {
-        private DatabaseContext db = new();
+        private User student;
 
         internal StudentWindow(User student)
         {
             InitializeComponent();
-            Closed += LogOut;
-            
-            db.Users.Update(student);
-            db.Logging.Add(new Logging(student, db.LoggingTypes.Single(logType => logType.ID == 1)));
-            db.SaveChanges();
 
-            db.Tests.Load();
-            ListOfTests.ItemsSource = db.Tests.Local.ToObservableCollection();
+            GreetingTextBlock.DataContext = this.student = student;
+            Closing += ToLog;
 
-            DataContext = student;
+            using (DatabaseContext db = new())
+                ListOfTests.ItemsSource = db.Tests.ToList();
+            CheckFilter();
         }
 
         private void SearchFilterChanged(object sender, TextChangedEventArgs e)
         {
             TextBox searchBox = (TextBox)sender;
-            ListOfTests.ItemsSource = db.Tests.Where(test => searchBox.Text == "" || test.Name.Contains(searchBox.Text)).ToList();
+            
+            using (DatabaseContext db = new())
+                ListOfTests.ItemsSource = db.Tests.Where(test => searchBox.Text == "" || EF.Functions.Like(test.Name, $"%{searchBox.Text}%")).ToList();
+            CheckFilter();
         }
 
-        private void DoTest(object sender, SelectionChangedEventArgs e) => new TestWindow((User)DataContext, (Test)ListOfTests.SelectedItem).ShowDialog();
+        private void GetTested(object sender, SelectionChangedEventArgs e) => new TestWindow(student, (Test)ListOfTests.SelectedItem).ShowDialog();
 
-        private void LogOut(object? sender, EventArgs e)
+        private void ToLog(object? sender, EventArgs e)
         {
-            db.Logging.Add(new Logging((User)DataContext, db.LoggingTypes.Single(logType => logType.ID == 2)));
-            db.SaveChanges();
-            db.Dispose();
+            using (DatabaseContext db = new())
+            {
+                db.Users.Update(student);
+                db.Logging.Add(new Logging(student, db.LoggingTypes.Find(2)!));
+                db.SaveChanges();
+            }
         }
 
-        private void CloseStudentWindow(object sender, RoutedEventArgs e)
+        private void LogOut(object sender, RoutedEventArgs e)
         {
             new SignInWindow().Show();
             Close();
+        }
+
+        private void CheckFilter()
+        {
+            if (ListOfTests.Items.Count == 0)
+                FilterFailedTextBlock.Opacity = 1;
+            else
+                FilterFailedTextBlock.Opacity = 0;
         }
     }
 }

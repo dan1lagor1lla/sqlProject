@@ -55,6 +55,13 @@ namespace sqlProject
                     new StudentWindow(user).Show();
                     break;
             }
+
+            using (DatabaseContext db = new())
+            {
+                db.Users.Update(user);
+                db.Logging.Add(new Logging(user, db.LoggingTypes.Find(1)!));
+                db.SaveChanges();
+            }
             Close();
         }
 

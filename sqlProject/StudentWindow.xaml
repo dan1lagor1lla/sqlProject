@@ -86,18 +86,27 @@
         <Border
             Style="{DynamicResource BorderBaseStyle}"
             Grid.Row="1">
-            <ListBox
-                Name="ListOfTests"
-                SelectionChanged="DoTest"
-                VirtualizingPanel.ScrollUnit="Pixel"/>
+            <Grid
+                MaxWidth="750">
+                <ListBox
+                    Name="ListOfTests"
+                    SelectionChanged="GetTested"
+                    VirtualizingPanel.ScrollUnit="Pixel"/>
+                <TextBlock
+                    Name="FilterFailedTextBlock"
+                    Text="Нет результатов"
+                    TextWrapping="Wrap"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Opacity="0"/>
+            </Grid>
         </Border>
-
         <GridSplitter
             Grid.Column="1"
             Grid.RowSpan="2"
             Width="15"
             HorizontalAlignment="Stretch"/>
-
         <Border
             Style="{DynamicResource BorderBaseStyle}"
             Grid.Column="2"
@@ -113,10 +122,11 @@
                         DockPanel.Dock="Bottom"/>
                     <Button
                         Content="Выйти"
-                        Click="CloseStudentWindow"
+                        Click="LogOut"
                         DockPanel.Dock="Bottom"/>
                 </WrapPanel>
                 <TextBlock
+                    Name="GreetingTextBlock"
                     Text="{Binding StringFormat=Добро пожаловать\,\ {0}, Path=Login}"
                     DockPanel.Dock="Top"
                     FontSize="25"

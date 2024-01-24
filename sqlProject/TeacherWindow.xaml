@@ -168,11 +168,10 @@
                                             KeyDown="UpdateSourceOfTextProperty"
                                             BorderThickness="0"
                                             Background="Transparent"/>
-                                        <CheckBox
-                                            FontSize="45"
-                                            HorizontalContentAlignment="Stretch"
-                                            HorizontalAlignment="Stretch"
-                                            IsChecked="{Binding Path=IsUsing}"/>
+                                        <ToggleButton
+                                            Style="{DynamicResource CheckBoxStyle}"
+                                            IsChecked="{Binding Path=IsUsing}"
+                                            Margin="3,0"/>
                                     </DockPanel>
                                 </Expander.Header>
                                 <StackPanel>
@@ -193,23 +192,13 @@
                                                         Background="Transparent"
                                                         BorderThickness="0"/>
                                                     <ToggleButton
-                                                        Name="toggle"
                                                         Style="{DynamicResource CheckBoxStyle}"
                                                         IsChecked="{Binding Path=IsCorrect}"
-                                                        BorderThickness="0"
-                                                        Background="Transparent"
-                                                        Cursor="Hand"
-                                                        Margin="5,0">
-                                                    </ToggleButton>
+                                                        Margin="5,0"/>
                                                     <Button
                                                         Click="RemoveAnswer"
-                                                        Background="Transparent">
-                                                        <Button.Content>
-                                                            <Image
-                                                                Source="images/binIcon.png"
-                                                                Height="25"/>
-                                                        </Button.Content>
-                                                    </Button>
+                                                        Content="{DynamicResource BinIcon}"
+                                                        Background="Transparent"/>
                                                 </StackPanel>
                                             </DataTemplate>
                                         </ListBox.ItemTemplate>
