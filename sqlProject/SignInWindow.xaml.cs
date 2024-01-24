@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Printing;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,42 +27,52 @@ namespace sqlProject
 
         private void TryLogIn(object sender, RoutedEventArgs e)
         {
-            if (LoginInput.Text == "" || LoginInput.Text.Trim() == "")
-            {
-                new NotificationWindow("Введите логин!").ShowDialog();
+            if (!CheckInputEmptiness(LoginInputBox, PasswordInputBox))
                 return;
-            }
-            if (PasswordInput.Text == "" || PasswordInput.Text.Trim() == "")
-            {
-                new NotificationWindow("Введите пароль!").ShowDialog();
-                return;
-            }
+
+            User? user;
             using (DatabaseContext db = new())
+                user = db.Users.FirstOrDefault(user => user.Login == LoginInputBox.Text);
+
+            if (user is null)
             {
-                User? user = db.Users.FirstOrDefault(user => user.Login == LoginInput.Text);
-                if (user is null)
-                {
-                    new NotificationWindow("Пользователя с данным логином не найдено!").ShowDialog();
-                    RegisterUnsuccessfulAttemptToLogin();
-                    return;
-                }
-                if (user.Password != PasswordInput.Text)
-                {
-                    new NotificationWindow("Неверный пароль!").ShowDialog();
-                    RegisterUnsuccessfulAttemptToLogin();
-                    return;
-                }
-                switch (user.UserTypeID)
-                {
-                    case 1:
-                        new TeacherWindow().Show();
-                        break;
-                    default:
-                        new StudentWindow(user).Show();
-                        break;
-                }
-                Close();
+                new NotificationWindow("Пользователя с данным логином не найдено!").ShowDialog();
+                return;
             }
+            if (user.Password != PasswordInputBox.Text)
+            {
+                new NotificationWindow("Неверный пароль!").ShowDialog();
+                RegisterUnsuccessfulAttemptToLogin();
+                return;
+            }
+
+            switch (user.UserTypeID)
+            {
+                case 1:
+                    new TeacherWindow().Show();
+                    break;
+                default:
+                    new StudentWindow(user).Show();
+                    break;
+            }
+            Close();
+        }
+
+        private void GoToSignUpWindow(object sender, MouseButtonEventArgs e)
+        {
+            new SignUpWindow().Show();
+            Close();
+        }
+        
+        private bool CheckInputEmptiness(params TextBox[] inputBoxes)
+        {
+            foreach (TextBox inputBox in inputBoxes)
+                if (inputBox.Text == "" || inputBox.Text.All(chr => chr == ' '))
+                {
+                    new NotificationWindow($"Введите, {inputBox.Uid.ToLower()}").ShowDialog();
+                    return false;
+                }
+            return true;
         }
 
         private void RegisterUnsuccessfulAttemptToLogin()
@@ -74,12 +85,6 @@ namespace sqlProject
                 IsEnabled = true;
                 unsuccessfulAttemptsToLogIn = 0;
             }
-        }
-
-        private void SignUp(object sender, MouseButtonEventArgs e)
-        {
-            new SignUpWindow().Show();
-            Close();
         }
     }
 }

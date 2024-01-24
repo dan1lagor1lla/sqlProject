@@ -31,6 +31,9 @@
             <Setter
                 Property="Margin"
                 Value="0,3.5"/>
+            <EventSetter
+                Event="TextChanged"
+                Handler="DataInputChanged"/>
         </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
@@ -53,9 +56,6 @@
                 Property="Margin"
                 Value="0,3,0,10"/>
             <Setter
-                Property="Visibility"
-                Value="Collapsed"/>
-            <Setter
                 Property="TextWrapping"
                 Value="Wrap"/>
             <Setter
@@ -64,7 +64,7 @@
             <Style.Triggers>
                 <Trigger
                     Property="Text"
-                    Value="{x:Null}">
+                    Value="">
                     <Setter
                         Property="Visibility"
                         Value="Collapsed"/>
@@ -82,48 +82,42 @@
                 Text="Создание аккаунта"
                 Margin="0,0,0,25"/>
             <TextBox
-                Name="LoginInput"
-                TextChanged="LoginInputChanged"
-                Uid="Логин">
-            </TextBox>
+                Name="LoginInputBox"
+                Uid="Логин"/>
             <TextBlock
-                Name="LoginInputAdvice"
-                Style="{StaticResource AdviceTextBlock}"
-                Text="{Binding ElementName=LoginInput, Path=DataContext, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding ElementName=LoginInputBox, Path=DataContext}"
+                Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
-                Name="EmailInput"
-                TextChanged="EmailInputChanged"
+                Name="EmailInputBox"
                 Uid="Электронная почта"/>
             <TextBlock
-                Name="EmailInputAdvice"
+                Text="{Binding ElementName=EmailInputBox, Path=DataContext}"
                 Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
-                Name="PasswordInput"
-                TextChanged="PasswordInputChanged"
+                Name="PasswordInputBox"
                 Uid="Пароль"/>
             <TextBlock
-                Name="PasswordInputAdvice"
+                Text="{Binding ElementName=PasswordInputBox, Path=DataContext}"
                 Style="{StaticResource AdviceTextBlock}"/>
             <TextBox
-                Name="PasswordInputCheck"
-                TextChanged="PasswordInputCheckChanged"
+                Name="PasswordInputRepeatitionBox"
                 Uid="Пароль повторно"/>
             <TextBlock
-                Name="PasswordInputCheckAdvice"
+                Text="{Binding ElementName=PasswordInputRepeatitionBox, Path=DataContext}"
                 Style="{StaticResource AdviceTextBlock}"/>
             <Button
                 Name="TrySignUpButton"
                 Click="TrySignUp"
                 Content="Cоздать"
                 IsDefault="True"
-                Margin="0,7.5,0,5"
-                IsEnabled="False"/>
+                IsEnabled="False"
+                Margin="0,7.5,0,5"/>
             <TextBlock
                 FontSize="20"
                 Margin="0,5">
                 <Run
                     Text="У меня уже есть аккаунт"
-                    MouseDown="SignIn"
+                    MouseDown="BackToSignInWindow"
                     Style="{DynamicResource HighlightRunStyle}"/>
             </TextBlock>
             <Button
