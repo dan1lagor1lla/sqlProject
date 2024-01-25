@@ -20,8 +20,6 @@ using Microsoft.Win32;
 using sqlProject.model;
 
 // to do : teacher can see all statistic
-//       : design
-//         all answers cannot be correct? or can be
 
 namespace sqlProject
 {

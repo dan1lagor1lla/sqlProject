@@ -173,7 +173,7 @@
                             Timeline.DesiredFrameRate="60">
                             <ThicknessAnimation
                                 Storyboard.TargetProperty="BorderThickness"
-                                To="0,0,0,2"
+                                To="0,0,0,3"
                                 Duration="0:0:0.3"/>
                         </Storyboard>
                     </BeginStoryboard>

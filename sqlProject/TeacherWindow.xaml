@@ -15,17 +15,6 @@
         WindowStartupLocation="CenterScreen"
         Style="{DynamicResource WindowBaseStyle}">
     <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter
-                Property="Foreground"
-                Value="{DynamicResource TextBrush}"/>
-            <Setter
-                Property="CaretBrush"
-                Value="{DynamicResource TextBrush}"/>
-            <Setter
-                Property="SelectionBrush"
-                Value="{DynamicResource TextBrush}"/>
-        </Style>
         <Style x:Key="TestItemStyle"
                TargetType="ListBoxItem">
             <Setter
@@ -39,7 +28,36 @@
                 Value="10, 15"/>
         </Style>
         <Style TargetType="ListBox"
-               BasedOn="{StaticResource ListBoxBaseStyle}"/>
+               BasedOn="{StaticResource ListBoxBaseStyle}">
+            <Setter
+                Property="VirtualizingStackPanel.ScrollUnit"
+                Value="Pixel"/>
+            <Setter
+                Property="VirtualizingStackPanel.IsVirtualizing"
+                Value="True"/>
+            <Setter
+                Property="SelectionMode"
+                Value="Extended"/>
+            <Setter
+                Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter
+                Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+            <Setter
+                Property="CaretBrush"
+                Value="{DynamicResource TextBrush}"/>
+            <Setter
+                Property="SelectionBrush"
+                Value="{DynamicResource TextBrush}"/>
+        </Style>
         <Style TargetType="Button"
                BasedOn="{StaticResource ButtonBaseStyle}">
             <Setter
@@ -48,7 +66,7 @@
         </Style>
         <Style TargetType="GridSplitter"
                BasedOn="{StaticResource GridSplitterBaseStyle}"/>
-
+        
         <ContextMenu x:Key="ListOfTestsContextMenu"
                      Opened="ListOfTestsContextMenuOpened">
             <MenuItem
@@ -67,8 +85,67 @@
                 Header="Удалить выделенные вопросы"
                 Click="RemoveSelectedQuestions"/>
         </ContextMenu>
-        <ContextMenu x:Key="HiddenContextMenu"
-            Visibility="Hidden"/>
+        
+        <DataTemplate x:Key="AnswerDataTemplate">
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="0, 2.5">
+                <TextBox
+                    Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                    Style="{DynamicResource TextBoxDownLineBaseStyle}"
+                    KeyDown="UpdateSourceOfTextProperty"/>
+                <ToggleButton
+                    Style="{DynamicResource CheckBoxStyle}"
+                    IsChecked="{Binding Path=IsCorrect}"
+                    Margin="5,0"/>
+                <Button
+                    Click="RemoveAnswer"
+                    Content="{DynamicResource BinIcon}"
+                    Background="Transparent"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="QuestionDataTemplate">
+            <Expander
+                Expanded="ListOfAnswersExpanded">
+                <Expander.Header>
+                    <DockPanel
+                        HorizontalAlignment="Stretch">
+                        <TextBox
+                            Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            Style="{DynamicResource TextBoxDownLineBaseStyle}"
+                            KeyDown="UpdateSourceOfTextProperty"
+                            Padding="0,0,5,2.5"/>
+                        <ToggleButton
+                            IsChecked="{Binding Path=IsUsing}"
+                            Style="{DynamicResource CheckBoxStyle}"
+                            Margin="3,0"/>
+                    </DockPanel>
+                </Expander.Header>
+                <StackPanel>
+                    <ListBox
+                        ItemsSource="{Binding Path=Answers}"
+                        ItemTemplate="{StaticResource AnswerDataTemplate}"
+                        Margin="50 0"
+                        FontSize="25"/>
+                    <Button
+                        Content="Добавить ответ"
+                        Click="AddAnswer"
+                        FontSize="12.5"
+                        Padding="20,12.5"
+                        Margin="27.5,5,0,5"
+                        HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Expander>
+        </DataTemplate>
+        <DataTemplate x:Key="TestDataTemplate">
+            <TextBox
+                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                Style="{DynamicResource TextBoxDownLineBaseStyle}"
+                KeyDown="UpdateSourceOfTextProperty"
+                MaxLength="15"
+                Margin="15,0"
+                Padding="0,0,5,2.5"/>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid
@@ -99,33 +176,10 @@
             <ListBox
                 Name="ListOfTests"
                 SelectionChanged="TestSelectionChanged"
-                ContextMenu="{StaticResource ListOfTestsContextMenu}"
+                ItemTemplate="{StaticResource TestDataTemplate}"
                 ItemContainerStyle="{StaticResource TestItemStyle}"
-                SelectionMode="Extended"
-                VirtualizingStackPanel.IsVirtualizing="True"
-                VirtualizingStackPanel.ScrollUnit="Pixel">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBox
-                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                Style="{DynamicResource TextBoxDownLineBaseStyle}"
-                                KeyDown="UpdateSourceOfTextProperty"
-                                Background="Transparent"
-                                MaxLength="15"
-                                Padding="5"
-                                Margin="15,0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
+                ContextMenu="{StaticResource ListOfTestsContextMenu}"/>
         </Border>
-    
         <GridSplitter
             Grid.Column="1"
             HorizontalAlignment="Stretch"
@@ -152,69 +206,8 @@
                 <ListBox
                     Name="ListOfQuestions"
                     ItemsSource="{Binding Path=Questions}"
-                    SelectionMode="Extended"
-                    HorizontalContentAlignment="Stretch"
-                    VirtualizingStackPanel.ScrollUnit="Pixel">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Expander
-                                Expanded="ListOfAnswersExpanded">
-                                <Expander.Header>
-                                    <DockPanel
-                                        HorizontalAlignment="Stretch">
-                                        <TextBox
-                                            Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                            ContextMenu="{StaticResource HiddenContextMenu}"
-                                            KeyDown="UpdateSourceOfTextProperty"
-                                            BorderThickness="0"
-                                            Background="Transparent"/>
-                                        <ToggleButton
-                                            Style="{DynamicResource CheckBoxStyle}"
-                                            IsChecked="{Binding Path=IsUsing}"
-                                            Margin="3,0"/>
-                                    </DockPanel>
-                                </Expander.Header>
-                                <StackPanel>
-                                    <ListBox
-                                        FontSize="25"
-                                        ItemsSource="{Binding Path=Answers}"
-                                        SelectionChanged="SelectionChanged"
-                                        Margin="50 0">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel
-                                                    Orientation="Horizontal"
-                                                    Margin="0, 2.5">
-                                                    <TextBox
-                                                        Text="{Binding Path=Content, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                                        ContextMenu="{StaticResource HiddenContextMenu}"
-                                                        KeyDown="UpdateSourceOfTextProperty"
-                                                        Background="Transparent"
-                                                        BorderThickness="0"/>
-                                                    <ToggleButton
-                                                        Style="{DynamicResource CheckBoxStyle}"
-                                                        IsChecked="{Binding Path=IsCorrect}"
-                                                        Margin="5,0"/>
-                                                    <Button
-                                                        Click="RemoveAnswer"
-                                                        Content="{DynamicResource BinIcon}"
-                                                        Background="Transparent"/>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                    <Button
-                                        Content="Добавить ответ"
-                                        Click="AddAnswer"
-                                        FontSize="15"
-                                        Margin="30,5,0,5"
-                                        Padding="15,10"
-                                        HorizontalAlignment="Left"/>
-                                </StackPanel>
-                            </Expander>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                    ItemTemplate="{StaticResource QuestionDataTemplate}"
+                    HorizontalContentAlignment="Stretch"/>
             </DockPanel>
         </Border>
         <GridSplitter
